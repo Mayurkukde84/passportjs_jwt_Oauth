@@ -1,9 +1,9 @@
 import React, {useState,useRef,useEffect} from 'react';
 import AuthService from '../Services/AuthService';
 import Message from '../Components/Message';
-import google from "../images/google.png";
+import google1 from "../images/google.png";
 import facebook from "../images/facebook.png"
-import github from "../images/github.png";
+import github1 from "../images/github.png";
 import {Link} from 'react-router-dom';
 import Particles from './Particles';
 import "./app.css"
@@ -11,7 +11,12 @@ const Home = props=>{
     const [user,setUser] = useState({username: "", password : "", role : ""});
     const [message,setMessage] = useState(null);
     let timerID = useRef(null);
-
+    const google = () => {
+      window.open("http://localhost:5000/auth/google", "_self");
+    };
+    const github = () => {
+      window.open("http://localhost:5000/auth/github", "_self");
+    };
     useEffect(()=>{
         return ()=>{
             clearTimeout(timerID);
@@ -48,7 +53,7 @@ const Home = props=>{
     <div className="wrapper">
       <div className="left">
         <div className="loginButton google" onClick={google}>
-          <img src={google} alt="google" className="icon" onClick={google} />
+          <img src={google1} alt="google" className="icon" onClick={google} />
           Google
         </div>
         <div className="loginButton facebook" onClick={facebook}>
@@ -56,7 +61,7 @@ const Home = props=>{
           Facebook
         </div>
         <div className="loginButton github" onClick={github}>
-          <img src={github} alt="google" className="icon" />
+          <img src={github1} alt="google" className="icon" />
           Github
         </div>
       </div>

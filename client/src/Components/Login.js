@@ -20,7 +20,7 @@ const Login = props=>{
             if(isAuthenticated){
                 authContext.setUser(user);
                 authContext.setIsAuthenticated(isAuthenticated);
-                props.history.push('/table');
+                props.history.push('/useroptions');
             }
             else
                 setMessage(message);
@@ -32,7 +32,7 @@ const Login = props=>{
     return(
         <div className='centerSignIn'>
             <form onSubmit={onSubmit}>
-                <h3 className='text-light'>Please sign in</h3>
+                <h3 >Please sign in</h3>
                 <label htmlFor="username" className="sr-only">Username: </label>
                 <input type="text" 
                        name="username" 

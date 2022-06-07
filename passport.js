@@ -2,6 +2,32 @@ const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 const JwtStrategy = require('passport-jwt').Strategy;
 const User = require('./models/User');
+const GoogleStrategy = require("passport-google-oauth2").Strategy
+const GithubStrategy = require("passport-github2").Strategy;
+const GOOGLE_CLIENT_ID = "917902088165-dv8ia9lda270grkn6o2kaaitg20tkm8d.apps.googleusercontent.com";
+const GOOGLE_SLIENT_SECRET = "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"
+
+passport.use(new GoogleStrategy({
+    clientID: GOOGLE_CLIENT_ID,
+    clientSecret: GOOGLE_SLIENT_SECRET,
+    callbackURL: "http://localhost:3000/table",
+    passReqToCallback: true
+},
+function (accessToken, refreshToken, profile, done){
+  
+        return done (err,profile)
+    
+}
+
+))
+
+passport.serializeUser((user,done) =>{
+    done(null,user)
+})
+
+passport.deserializeUser((user,done)=>{
+    done(null,user)
+})
 
 const cookieExtractor = req =>{
     let token = null;

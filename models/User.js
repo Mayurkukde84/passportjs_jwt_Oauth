@@ -17,7 +17,11 @@ const UserSchema = new mongoose.Schema({
         enum : ['user' , 'admin'],
         required : true
     },
-    todos: [{ type: mongoose.Schema.Types.ObjectId, ref: "Table"}]
+    profile :{
+        type:"String",
+        require:true
+    },
+    table: [{ type: mongoose.Schema.Types.ObjectId, ref: "Table"}]
 })
 
 

@@ -47,7 +47,7 @@ const Navbar = props =>{
                         Home
                     </li>
                 </Link> 
-                <Link to="/table">
+                <Link to="/tablevendor">
                     <li className="nav-item nav-link">
                         Table
                     </li>

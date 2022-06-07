@@ -1,0 +1,26 @@
+[
+    {
+        "id":1,
+        "VendorID":"698868",
+        "VendorName": "dhfhd",
+        "PhoneNumber" : "3425", 
+        "GSTNumber": "kjhjk",
+        "VendorType":"kjbjkb",
+        "BankAccountDetails":"mvnm",
+        "Address":"jnk"
+      
+
+    },
+    {
+        "id":2,
+        "VendorId":"698879",
+        "VendorName": "dhfhd",
+        "PhoneNumber" : "6465456", 
+        "GSTNumber": "kjhjk",
+        "VendorType":"kjbjkb",
+        "BankAccountDetails":"mvnm",
+        "Address":"jnk"
+      
+
+    }
+]

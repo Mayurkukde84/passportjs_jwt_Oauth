@@ -1,4 +1,5 @@
 import React from "react";
+
 import { posts } from "../data";
 const Table = () => {
   return (
@@ -67,7 +68,16 @@ const Table = () => {
                   <th scope="row">Date Of Purchase</th>
                   <td>{post.DateOfPurchase}</td>
                 </tr>
-                <tr>
+
+                
+               
+              </tbody>
+            </table>
+
+            <h3 className="text-center">Table Employee</h3>
+            <table className="table table-striped table-hover table-bordered ">
+              <tbody>
+              <tr>
                   <th scope="row" className="col-5">
                     Table Employee
                   </th>
@@ -89,9 +99,15 @@ const Table = () => {
                   <th scope="row">Address</th>
                   <td colspan="2">{post.Address}</td>
                 </tr>
-                <tr>
-                  <th scope="row">TableVendor</th>
-                  <td colspan="2">{post.PhoneNumber}</td>
+              </tbody>
+            </table>
+
+            <h3 className="text-center ">Table Vendor</h3>
+            <table className="table table-striped table-hover table-bordered">
+            <tbody>
+            <tr >
+                  <th scope="row" className="col-5" >TableVendor</th>
+                  <td colspan="2" className="col-5">{post.PhoneNumber}</td>
                 </tr>
                 <tr>
                   <th scope="row">Vendor ID</th>
@@ -121,7 +137,10 @@ const Table = () => {
                   <th scope="row">Address</th>
                   <td colspan="2">{post.Address2}</td>
                 </tr>
-              </tbody>
+
+            </tbody>
+            
+
             </table>
             
             

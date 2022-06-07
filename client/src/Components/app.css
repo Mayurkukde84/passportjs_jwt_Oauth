@@ -162,3 +162,18 @@
     margin-top: 5%;
 
   } 
+
+  .centerbutton{
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    position: relative;
+    margin-top: 5%;
+    }
+
+    .addbutton{
+      margin-left: 92%;
+      margin-top: 2%;
+    }
