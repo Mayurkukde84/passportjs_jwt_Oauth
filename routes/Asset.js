@@ -35,4 +35,14 @@ assetRouter.post("/tableasset", async(req,res) =>{
 
 })
 
+assetRouter.get("/getasset", async (req, res) => {
+    try {
+      const assetUser = await asset.find();
+      res.status(201).json(assetUser);
+      console.log(assetUser);
+    } catch (error) {
+      res.status(404).json(error);
+    }
+  });
+
 module.exports = assetRouter

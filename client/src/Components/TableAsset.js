@@ -1,10 +1,12 @@
-import React,{useState} from "react";
+import React, { useState, useEffect } from "react";
 import Popup from "reactjs-popup";
 import { GrFormView } from "react-icons/gr";
 import { FiEdit } from "react-icons/fi";
 import { AiFillDelete } from "react-icons/ai";
 import { NavLink } from "react-router-dom";
 const TableAsset = () => {
+  const [getAssetData, setAssetData] = useState([]);
+  console.log(getAssetData);
   const [inpAsset, setInpAsset] = useState({
     ItemName: " ",
     Descripation: " ",
@@ -17,16 +19,15 @@ const TableAsset = () => {
     ProjectName: " ",
     OwnedBy: " ",
     OwnershipDocument: " ",
-    DateOfPurchase: " "
+    DateOfPurchase: " ",
   });
 
   const setAsset = (e) => {
-   
     const { name, value } = e.target;
-    setInpAsset((preval)=>{
-      return{
+    setInpAsset((preval) => {
+      return {
         ...preval,
-        [name]:value,
+        [name]: value,
       };
     });
   };
@@ -34,32 +35,74 @@ const TableAsset = () => {
   const addinpasset = async (e) => {
     e.preventDefault();
 
-    const { ItemName, Descripation, Type, Mode, Vendor, Receipt, 
-      Price, CostCode, ProjectName ,
-      OwnedBy, OwnershipDocument ,DateOfPurchase } = inpAsset;
+    const {
+      ItemName,
+      Descripation,
+      Type,
+      Mode,
+      Vendor,
+      Receipt,
+      Price,
+      CostCode,
+      ProjectName,
+      OwnedBy,
+      OwnershipDocument,
+      DateOfPurchase,
+    } = inpAsset;
 
     const res = await fetch("http://localhost:5000/tableasset", {
-    method:"POST",
-    headers: {
-      "Content-Type": "application/json"
-  },
-    body: JSON.stringify({
-      ItemName,Descripation,Type,Mode,Vendor,Receipt,Price,CostCode,ProjectName,
-    OwnedBy,OwnershipDocument,DateOfPurchase
-  })
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        ItemName,
+        Descripation,
+        Type,
+        Mode,
+        Vendor,
+        Receipt,
+        Price,
+        CostCode,
+        ProjectName,
+        OwnedBy,
+        OwnershipDocument,
+        DateOfPurchase,
+      }),
     });
     const data = await res.json();
     console.log(data);
 
-    if(res.status === 404 || !data){
+    if (res.status === 404 || !data) {
       alert("error");
-      console.log("error")
-    }else {
+      console.log("error");
+    } else {
       alert("data added");
-      console.log("data aaded")
-      
+      console.log("data aaded");
     }
   };
+  const addgetasset = async (e) => {
+    const res = await fetch("http://localhost:5000/getasset", {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    const data1 = await res.json();
+    console.log(data1);
+
+    if (res.status === 404 || !data1) {
+      alert("error");
+      console.log("error");
+    } else {
+      setAssetData(data1);
+      console.log("data aaded");
+    }
+  };
+
+  useEffect(() => {
+    addgetasset();
+  }, []);
 
   return (
     <>
@@ -79,7 +122,6 @@ const TableAsset = () => {
                       placeholder="Enter a phone number"
                       onChange={setAsset}
                       value={inpAsset.ItemName}
-                      
                     />
                   </div>
                   <div className="col form-inline p-2">
@@ -226,7 +268,11 @@ const TableAsset = () => {
                   </div>
                 </div>
 
-                <button type="submit" class="btn btn-primary" onClick={addinpasset}>
+                <button
+                  type="submit"
+                  class="btn btn-primary"
+                  onClick={addinpasset}
+                >
                   Submit
                 </button>
               </form>
@@ -257,40 +303,50 @@ const TableAsset = () => {
           </thead>
 
           <tbody>
-            <tr className="text-center">
-              <th scope="row">id</th>
-              <td>Item Name</td>
-              <td>Descripation</td>
-              <td>Type</td>
-              <td>Mode</td>
-              <td>vendor</td>
-              <td>Receipt</td>
-              <td>Price</td>
-              <td>Cost Code</td>
-              <td>Project Name</td>
-              <td>Owned By</td>
-              <td>Ownership Doument</td>
-              <td>Date Of Purchase</td>
+          {
+            getAssetData.map((element,id)=>{
+              return(
+                <>
+                <tr className="text-center">
+              <th scope="row">{id + 1}</th>
+              <td>{element.ItemName}</td>
+              <td>{element.Descripation}</td>
+              <td>{element.Type}</td>
+              <td>{element.Mode}</td>
+              <td>{element.vendor}</td>
+              <td>{element.Receipt}</td>
+              <td>{element.Price}</td>
+              <td>{element.CostCode}</td>
+              <td>{element.ProjectName}</td>
+              <td>{element.OwnedBy}</td>
+              <td>{element.OwnershipDocument}</td>
+              <td>{element.DateOfPurchase}</td>
 
               <td className="d-flex justify-content-between">
-              <NavLink to={"/tableassetdetails"}>
-              <button className="btn btn-success">
-                  <GrFormView />
-                </button>
-              </NavLink>
-                
-                <NavLink to={"/tableassetedit"}>
-                <button className="btn btn-primary">
-                  <FiEdit />
-                </button>
+                <NavLink to={"/tableassetdetails"}>
+                  <button className="btn btn-success">
+                    <GrFormView />
+                  </button>
                 </NavLink>
-            
+
+                <NavLink to={"/tableassetedit"}>
+                  <button className="btn btn-primary">
+                    <FiEdit />
+                  </button>
+                </NavLink>
 
                 <button className="btn btn-danger">
                   <AiFillDelete />
                 </button>
               </td>
             </tr>
+
+                </>
+
+              )
+            })
+          }
+            
           </tbody>
         </table>
       </div>
