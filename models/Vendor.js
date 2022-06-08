@@ -8,7 +8,7 @@ const VendorSchema = new mongoose.Schema({
     },
     VendorID:{
         type:"Number",
-        require:true
+        required:true
     },
    
     VendorName:{
