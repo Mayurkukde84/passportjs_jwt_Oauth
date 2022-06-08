@@ -1,5 +1,4 @@
 import React,{useState} from "react";
-import { posts } from "../data";
 import Popup from "reactjs-popup";
 import { GrFormView } from "react-icons/gr";
 import { FiEdit } from "react-icons/fi";
@@ -18,18 +17,48 @@ const TableAsset = () => {
     ProjectName: " ",
     OwnedBy: " ",
     OwnershipDocument: " ",
-    DateOfPurchase: " ",
+    DateOfPurchase: " "
   });
 
   const setAsset = (e) => {
-    console.log(e.target.value);
-    const {name,value} = e.target;
+   
+    const { name, value } = e.target;
     setInpAsset((preval)=>{
       return{
         ...preval,
-        [name]:value
-      }
-    })
+        [name]:value,
+      };
+    });
+  };
+
+  const addinpasset = async (e) => {
+    e.preventDefault();
+
+    const { ItemName, Descripation, Type, Mode, Vendor, Receipt, 
+      Price, CostCode, ProjectName ,
+      OwnedBy, OwnershipDocument ,DateOfPurchase } = inpAsset;
+
+    const res = await fetch("http://localhost:5000/tableasset", {
+    method:"POST",
+    headers: {
+      "Content-Type": "application/json"
+  },
+    body: JSON.stringify({
+      ItemName,Descripation,Type,Mode,Vendor,Receipt,Price,CostCode,ProjectName,
+    OwnedBy,OwnershipDocument,DateOfPurchase
+  })
+    });
+    const data = await res.json();
+    console.log(data);
+
+    if(res.status === 404 || !data){
+      alert("error");
+      console.log("error")
+    }else {
+      alert("data added");
+      console.log("data aaded")
+      
+    }
   };
 
   return (
@@ -50,6 +79,7 @@ const TableAsset = () => {
                       placeholder="Enter a phone number"
                       onChange={setAsset}
                       value={inpAsset.ItemName}
+                      
                     />
                   </div>
                   <div className="col form-inline p-2">
@@ -196,7 +226,7 @@ const TableAsset = () => {
                   </div>
                 </div>
 
-                <button type="submit" class="btn btn-primary">
+                <button type="submit" class="btn btn-primary" onClick={addinpasset}>
                   Submit
                 </button>
               </form>

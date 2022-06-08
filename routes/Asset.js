@@ -10,7 +10,7 @@ assetRouter.post("/tableasset", async(req,res) =>{
     if(!ItemName || !Descripation || !Type || !Mode || !Vendor || !Receipt||
         !Price || !CostCode || !ProjectName ||
         !OwnedBy || !OwnershipDocument || !DateOfPurchase){
-            res.status(404).send("please fill the all data")
+            res.status(404).json("please fill the all data")
         }
 
     try{
@@ -18,19 +18,19 @@ assetRouter.post("/tableasset", async(req,res) =>{
         console.log(preasset)
 
         if(preasset){
-            res.status(404).send("this user is already present");
+            res.status(404).json("this user is already present");
         }else{
             const addasset = new asset({
                 ItemName,Descripation,Type,Mode,Vendor,Receipt,Price,CostCode,ProjectName,
     OwnedBy,OwnershipDocument,DateOfPurchase
             });
             await addasset.save();
-            res.status(201).json();
+            res.status(201).json(addasset);
             console.log(addasset);
         }
 
     }catch (error){
-        res.status(404).send(error)
+        res.status(404).json(error)
     }
 
 })
