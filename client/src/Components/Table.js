@@ -1,5 +1,5 @@
 import React from "react";
-
+import Popup from "reactjs-popup";
 import { posts } from "../data";
 const Table = () => {
   return (

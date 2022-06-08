@@ -47,7 +47,7 @@ const Navbar = props =>{
                         Home
                     </li>
                 </Link> 
-                <Link to="/tablevendor">
+                <Link to="/Useroptions">
                     <li className="nav-item nav-link">
                         Table
                     </li>

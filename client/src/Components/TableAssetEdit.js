@@ -1,42 +1,39 @@
 import React,{useState} from "react";
 import { posts } from "../data";
-import Popup from "reactjs-popup";
-import { GrFormView } from "react-icons/gr";
-import { FiEdit } from "react-icons/fi";
-import { AiFillDelete } from "react-icons/ai";
-import { NavLink } from "react-router-dom";
-const TableAsset = () => {
-  const [inpAsset, setInpAsset] = useState({
-    ItemName: " ",
-    Descripation: " ",
-    Type: " ",
-    Mode: " ",
-    Vendor: " ",
-    Receipt: " ",
-    Price: " ",
-    CostCode: " ",
-    ProjectName: " ",
-    OwnedBy: " ",
-    OwnershipDocument: " ",
-    DateOfPurchase: " ",
-  });
 
-  const setAsset = (e) => {
-    console.log(e.target.value);
-    const {name,value} = e.target;
-    setInpAsset((preval)=>{
-      return{
-        ...preval,
-        [name]:value
-      }
-    })
-  };
-
+const TableAssetEdit = () => {
+    const [inpAsset, setInpAsset] = useState({
+        ItemName: " ",
+        Descripation: " ",
+        Type: " ",
+        Mode: " ",
+        Vendor: " ",
+        Receipt: " ",
+        Price: " ",
+        CostCode: " ",
+        ProjectName: " ",
+        OwnedBy: " ",
+        OwnershipDocument: " ",
+        DateOfPurchase: " ",
+      });
+    
+      const setAsset = (e) => {
+        console.log(e.target.value);
+        const {name,value} = e.target;
+        setInpAsset((preval)=>{
+          return{
+            ...preval,
+            [name]:value
+          }
+        })
+      };
+    
+ 
   return (
     <>
-      <div className="addbutton">
-        <Popup trigger={<button>+ADD</button>} position="bottom center">
-          {(close) => (
+        <div>
+      
+          
             <div className="container">
               <form className="bg-light p-2 ">
                 <div className="row p-2 ">
@@ -196,76 +193,20 @@ const TableAsset = () => {
                   </div>
                 </div>
 
-                <button type="submit" class="btn btn-primary">
+                <button
+                  type="submit"
+                  class="btn btn-primary mt-3"
+                  
+                >
                   Submit
                 </button>
               </form>
             </div>
-          )}
-        </Popup>
-      </div>
-
-      <div className="border border-success p-2 m-2 table-responsive">
-        <table class="table table-light table-striped ">
-          <thead>
-            <tr className="text-center">
-              <th scope="col">ID</th>
-              <th scope="col">Item Name</th>
-              <th scope="col">Descripation</th>
-              <th scope="col">Type</th>
-              <th scope="col">Mode</th>
-              <th scope="col">Vendor</th>
-              <th scope="col">Receipt</th>
-              <th scope="col">Price</th>
-              <th scope="col">Cost code</th>
-              <th scope="col">Project Name</th>
-              <th scope="col">Owned by</th>
-              <th scope="col">Ownership Document</th>
-              <th scope="col">Date Of Purhase</th>
-              <th scope="col">Action</th>
-            </tr>
-          </thead>
-
-          <tbody>
-            <tr className="text-center">
-              <th scope="row">id</th>
-              <td>Item Name</td>
-              <td>Descripation</td>
-              <td>Type</td>
-              <td>Mode</td>
-              <td>vendor</td>
-              <td>Receipt</td>
-              <td>Price</td>
-              <td>Cost Code</td>
-              <td>Project Name</td>
-              <td>Owned By</td>
-              <td>Ownership Doument</td>
-              <td>Date Of Purchase</td>
-
-              <td className="d-flex justify-content-between">
-              <NavLink to={"/tableassetdetails"}>
-              <button className="btn btn-success">
-                  <GrFormView />
-                </button>
-              </NavLink>
-                
-                <NavLink to={"/tableassetedit"}>
-                <button className="btn btn-primary">
-                  <FiEdit />
-                </button>
-                </NavLink>
-            
-
-                <button className="btn btn-danger">
-                  <AiFillDelete />
-                </button>
-              </td>
-            </tr>
-          </tbody>
-        </table>
+        
+        
       </div>
     </>
   );
 };
 
-export default TableAsset;
+export default TableAssetEdit;
