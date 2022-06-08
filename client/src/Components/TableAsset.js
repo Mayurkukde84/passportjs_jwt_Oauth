@@ -73,7 +73,7 @@ const TableAsset = () => {
     const data = await res.json();
     console.log(data);
 
-    if (res.status === 404 || !data) {
+    if (res.status === 422 || !data) {
       alert("error");
       console.log("error");
     } else {
@@ -91,7 +91,7 @@ const TableAsset = () => {
     const data1 = await res.json();
     console.log(data1);
 
-    if (res.status === 404 || !data1) {
+    if (res.status === 422 || !data1) {
       alert("error");
       console.log("error");
     } else {
@@ -323,7 +323,7 @@ const TableAsset = () => {
               <td>{element.DateOfPurchase}</td>
 
               <td className="d-flex justify-content-between">
-                <NavLink to={"/tableassetdetails"}>
+                <NavLink to={`/tableassetdetails/${element._id}`}>
                   <button className="btn btn-success">
                     <GrFormView />
                   </button>
