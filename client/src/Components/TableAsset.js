@@ -4,8 +4,10 @@ import { GrFormView } from "react-icons/gr";
 import { FiEdit } from "react-icons/fi";
 import { AiFillDelete } from "react-icons/ai";
 import { NavLink } from "react-router-dom";
+import { useParams } from 'react-router';
 const TableAsset = () => {
   const [getAssetData, setAssetData] = useState([]);
+  const {id } = useParams (" ")
   console.log(getAssetData);
   const [inpAsset, setInpAsset] = useState({
     ItemName: " ",
@@ -103,6 +105,31 @@ const TableAsset = () => {
   useEffect(() => {
     addgetasset();
   }, []);
+
+  const assetdelet = async (id) =>{
+    
+    const res2 = await fetch(`http://localhost:5000/getassetdelet/${id}`,{
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    const deletdata = await res2.json();
+    console.log(deletdata);
+
+    if (res2.status === 422 || !deletdata){
+      console.log("error")
+     
+    }else{
+      console.log("user deleted");
+      addgetasset(deletdata);
+     
+      
+    }
+  }
+
+  
+  
 
   return (
     <>
@@ -313,7 +340,7 @@ const TableAsset = () => {
               <td>{element.Descripation}</td>
               <td>{element.Type}</td>
               <td>{element.Mode}</td>
-              <td>{element.vendor}</td>
+              <td>{element.Vendor}</td>
               <td>{element.Receipt}</td>
               <td>{element.Price}</td>
               <td>{element.CostCode}</td>
@@ -329,13 +356,13 @@ const TableAsset = () => {
                   </button>
                 </NavLink>
 
-                <NavLink to={"/tableassetedit"}>
+                <NavLink to={`/tableassetedit/${element._id}`}>
                   <button className="btn btn-primary">
                     <FiEdit />
                   </button>
                 </NavLink>
 
-                <button className="btn btn-danger">
+                <button className="btn btn-danger" onClick={()=>assetdelet(element._id)}>
                   <AiFillDelete />
                 </button>
               </td>

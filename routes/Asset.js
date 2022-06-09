@@ -56,5 +56,31 @@ assetRouter.get("/getasset", async (req, res) => {
       res.status(422).json(error);
     }
   });
+  assetRouter.patch("/getassetedit/:id",async(req,res)=>{
+    try{
+        const {id} = req.params;
+
+        const updateasset = await asset.findByIdAndUpdate(id,req.body,{
+            new:true
+        })
+        console.log(updateasset);
+        res.status(201).json(updateasset)
+    }catch(error){
+        res.status(422).json(error)
+    }
+})
+
+assetRouter.delete("/getassetdelet/:id",async(req,res)=>{
+    try{
+        const {id} = req.params;
+        const getassetdelet = await asset.findByIdAndDelete({_id:id})
+                console.log(getassetdelet);
+                res.status(201).json(getassetdelet)
+        }catch(error){
+            res.status(422).json(error)
+        }
+    
+})
+
 
 module.exports = assetRouter

@@ -1,7 +1,9 @@
-import React,{useState} from "react";
-import { posts } from "../data";
+import React,{useState,useEffect} from "react";
+import { useParams } from "react-router";
+
 
 const TableAssetEdit = () => {
+  const {id} = useParams(" ")
     const [inpAsset, setInpAsset] = useState({
         ItemName: " ",
         Descripation: " ",
@@ -27,6 +29,61 @@ const TableAssetEdit = () => {
           }
         })
       };
+
+      const addgetasset = async (e) => {
+        const res = await fetch(`http://localhost:5000/getasset/${id}`, {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
+        const data1 = await res.json();
+        console.log(data1);
+    
+        if (res.status === 422 || !data1) {
+          alert("error");
+          console.log("error");
+        } else {
+          setInpAsset(data1);
+          console.log("data aaded");
+        }
+      };
+    
+      useEffect(() => {
+        addgetasset();
+      }, []);
+
+      const updateasset = async(e) =>{
+        e.preventDefault();
+        const{
+            
+          ItemName,Descripation,Type,Mode,Vendor,Receipt,Price,CostCode,ProjectName,
+          OwnedBy,OwnershipDocument,DateOfPurchase
+          } =inpAsset;
+        const res2 = await fetch(`http://localhost:5000/getassetedit/${id}`,{
+            method:"PATCH",
+            headers: {
+                "Content-Type" : "application/json"
+            },
+            body:JSON.stringify({
+               
+              ItemName,Descripation,Type,Mode,Vendor,Receipt,Price,CostCode,ProjectName,
+              OwnedBy,OwnershipDocument,DateOfPurchase
+            })
+        })
+        const data2 = await res2.json();
+        console.log(data2)
+
+        if(res2.status === 422 || !data2){
+            alert("fill the data")
+           
+        }else{
+            alert("data added")
+            setInpAsset(data2)
+            
+            
+        }
+    }
     
  
   return (
@@ -196,7 +253,7 @@ const TableAssetEdit = () => {
                 <button
                   type="submit"
                   class="btn btn-primary mt-3"
-                  
+                  onClick={updateasset}
                 >
                   Submit
                 </button>
