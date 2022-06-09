@@ -6,8 +6,9 @@ import { useParams } from 'react-router';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 
-import { NavLink } from 'react-router-dom';
+import { NavLink,useHistory } from 'react-router-dom';
 const TableAssetDetails = () => {
+  const history = useHistory("")
     const [getAssetID,setAssetID] = useState([ ])
     const {id } = useParams (" ")
     const addgetassetid = async () => {
@@ -50,9 +51,9 @@ const TableAssetDetails = () => {
         }
       };
     
-      useEffect(() => {
-        getassetuser();
-      }, []);
+      // useEffect(() => {
+      //   getassetuser();
+      // }, []);
 
       const assetdelet = async (id) =>{
     
@@ -67,10 +68,12 @@ const TableAssetDetails = () => {
     
         if (res2.status === 422 || !deletdata){
           console.log("error")
+          history.go("/tableasset")
          
         }else{
           console.log("user deleted");
           getassetuser(deletdata);
+          history.go("/tableasset")
          
           
         }

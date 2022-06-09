@@ -10,12 +10,15 @@ import Admin  from './Components/Admin';
 import PrivateRoute from './hocs/PrivateRoute';
 import UnPrivateRoute from './hocs/UnPrivateRoute';
 import {BrowserRouter as Router, Route} from 'react-router-dom';
-import TableEmployee from './Components/TableEmployee';
+
 import Vendor from './Components/Vendor';
 import VendorDetails from './Components/VendorDetails';
 import VendorEdit from './Components/VendorEdit';
 import TableAssetEdit from './Components/TableAssetEdit';
 import TableAssetDetails from './Components/TableAssetDetails';
+import Employee from './Components/Employee';
+import EmployeeDetails from './Components/EmployeeDetails';
+import EmployeeEdit from './Components/EmployeeEdit';
 
 
 
@@ -33,10 +36,13 @@ function App() {
       <PrivateRoute path="/tableassetdetails/:id" roles={["user","admin"]} component={TableAssetDetails}/>
       <PrivateRoute path="/tableassetedit/:id" roles={["user","admin"]} component={TableAssetEdit}/>
       <PrivateRoute path="/useroptions" roles={["user","admin"]} component={UserOptions}/>
-      <PrivateRoute path="/tableemployee" roles={["user","admin"]} component={TableEmployee}/>
+
       <PrivateRoute path="/tablevendor" roles={["user","admin"]} component={Vendor}/>
       <PrivateRoute path="/getvendor/:id" roles={["user","admin"]} component={VendorDetails}/>
       <PrivateRoute path="/getvendoredit/:id" roles={["user","admin"]} component={VendorEdit}/>
+      <PrivateRoute path="/tableemployee" roles={["user","admin"]} component={Employee}/>
+      <PrivateRoute path="/tableemployeedetails/:id" roles={["user","admin"]} component={EmployeeDetails}/>
+      <PrivateRoute path="/tableemployeeedit/:id" roles={["user","admin"]} component={EmployeeEdit}/>
       
       <PrivateRoute path="/admin" roles={["admin"]} component={Admin}/>
       

@@ -3,11 +3,12 @@ import Popup from "reactjs-popup";
 import { GrFormView } from "react-icons/gr";
 import { FiEdit } from "react-icons/fi";
 import { AiFillDelete } from "react-icons/ai";
-import { NavLink } from "react-router-dom";
-import { useParams } from 'react-router';
+import { NavLink,useHistory } from "react-router-dom";
+
 const TableAsset = () => {
+  const history = useHistory("")
   const [getAssetData, setAssetData] = useState([]);
-  const {id } = useParams (" ")
+  
   console.log(getAssetData);
   const [inpAsset, setInpAsset] = useState({
     ItemName: " ",
@@ -81,6 +82,7 @@ const TableAsset = () => {
     } else {
       alert("data added");
       console.log("data aaded");
+      history.go("/tableasset")
     }
   };
   const addgetasset = async (e) => {
@@ -123,7 +125,7 @@ const TableAsset = () => {
     }else{
       console.log("user deleted");
       addgetasset(deletdata);
-     
+      history.go("/tableasset")
       
     }
   }

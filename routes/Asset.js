@@ -56,6 +56,8 @@ assetRouter.get("/getasset", async (req, res) => {
       res.status(422).json(error);
     }
   });
+
+ 
   assetRouter.patch("/getassetedit/:id",async(req,res)=>{
     try{
         const {id} = req.params;

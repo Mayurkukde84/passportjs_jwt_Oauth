@@ -53,9 +53,9 @@ export default function VendorDetails() {
         }
       };
     
-      useEffect(() => {
-        getvendoruser();
-      }, []);
+      // useEffect(() => {
+      //   getvendoruser();
+      // }, []);
 
       const vendordelet = async (id) =>{
     

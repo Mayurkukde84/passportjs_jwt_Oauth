@@ -1,9 +1,9 @@
 import React,{useState,useEffect} from "react";
-import { useParams } from "react-router";
-
+import { useParams,useHistory } from "react-router";
 
 const TableAssetEdit = () => {
   const {id} = useParams(" ")
+  const history = useHistory("")
     const [inpAsset, setInpAsset] = useState({
         ItemName: " ",
         Descripation: " ",
@@ -46,6 +46,7 @@ const TableAssetEdit = () => {
         } else {
           setInpAsset(data1);
           console.log("data aaded");
+      
         }
       };
     
@@ -80,6 +81,7 @@ const TableAssetEdit = () => {
         }else{
             alert("data added")
             setInpAsset(data2)
+            history.push("/tableasset")
             
             
         }
