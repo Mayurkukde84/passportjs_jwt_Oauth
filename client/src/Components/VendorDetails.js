@@ -81,7 +81,7 @@ export default function VendorDetails() {
         
   return (
       <div className='center p-5 mt-3'>
-    <Card sx={{ maxWidth: 345 }}>
+    <Card sx={{ maxWidth: 3500 }}>
      
       <CardContent>
         <Typography gutterBottom variant="h5" component="div">

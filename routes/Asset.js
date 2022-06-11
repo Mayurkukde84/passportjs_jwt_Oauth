@@ -15,7 +15,7 @@ assetRouter.post("/tableasset", async(req,res) =>{
 
     try{
         const preasset = await asset.findOne({ ItemName:ItemName});
-        console.log(preasset)
+        
 
         if(preasset){
             res.status(422).json("this user is already present");
@@ -26,7 +26,7 @@ assetRouter.post("/tableasset", async(req,res) =>{
             });
             await addasset.save();
             res.status(201).json(addasset);
-            console.log(addasset);
+            
         }
 
     }catch (error){
@@ -47,10 +47,10 @@ assetRouter.get("/getasset", async (req, res) => {
 
   assetRouter.get("/getasset/:id", async (req, res) => {
     try {
-      console.log(req.params);
+      
       const {id} = req.params;
       const assetuserid = await asset.findById({_id:id});
-      console.log(assetuserid)
+      
       res.status(201).json(assetuserid)
     } catch (error) {
       res.status(422).json(error);
@@ -65,7 +65,7 @@ assetRouter.get("/getasset", async (req, res) => {
         const updateasset = await asset.findByIdAndUpdate(id,req.body,{
             new:true
         })
-        console.log(updateasset);
+        
         res.status(201).json(updateasset)
     }catch(error){
         res.status(422).json(error)
@@ -76,7 +76,7 @@ assetRouter.delete("/getassetdelet/:id",async(req,res)=>{
     try{
         const {id} = req.params;
         const getassetdelet = await asset.findByIdAndDelete({_id:id})
-                console.log(getassetdelet);
+               
                 res.status(201).json(getassetdelet)
         }catch(error){
             res.status(422).json(error)

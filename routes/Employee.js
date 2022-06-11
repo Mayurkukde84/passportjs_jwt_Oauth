@@ -4,7 +4,7 @@ const employee = require("../models/EmployeeSchema")
 
 
 employeeRouter.post("/tableemployee", async(req,res)=>{
-    console.log(req.body);
+  
 
     const { Name,EmployeeID,Department,PhoneNumber,Address} = req.body
 
@@ -27,7 +27,7 @@ employeeRouter.post("/tableemployee", async(req,res)=>{
             });
             await addemployee.save();
             res.status(201).json(addemployee);
-            console.log(addemployee)
+            
         }
     }catch(error){
         res.status(422).json(error)
@@ -51,7 +51,7 @@ employeeRouter.get("/getemployee/:id", async (req, res) => {
       console.log(req.params);
       const {id} = req.params;
       const employeeuser = await employee.findById({_id:id});
-      console.log(employeeuser)
+     
       res.status(201).json(employeeuser)
     } catch (error) {
       res.status(422).json(error);
@@ -65,7 +65,7 @@ employeeRouter.get("/getemployee/:id", async (req, res) => {
         const updateemployee = await employee.findByIdAndUpdate(id,req.body,{
             new:true
         })
-        console.log(updateemployee);
+      
         res.status(201).json(updateemployee)
     }catch(error){
         res.status(422).json(error)
@@ -75,7 +75,7 @@ employeeRouter.get("/getemployee/:id", async (req, res) => {
         try{
             const {id} = req.params;
             const getemployeedelet = await employee.findByIdAndDelete({_id:id})
-                    console.log(getemployeedelet);
+                    
                     res.status(201).json(getemployeedelet)
             }catch(error){
                 res.status(422).json(error)

@@ -2,7 +2,7 @@ import React, {useContext} from 'react';
 import {Link} from 'react-router-dom';
 import AuthService from '../Services/AuthService';
 import { AuthContext } from '../Context/AuthContext';
-
+import "./nav.css"
 const Navbar = props =>{
     const {isAuthenticated,user,setIsAuthenticated,setUser} = useContext(AuthContext);
     
@@ -52,6 +52,11 @@ const Navbar = props =>{
                         Table
                     </li>
                 </Link> 
+                <Link to="/login">
+                    <li className="nav-item nav-link">
+                        {user.username}
+                    </li>
+                </Link> 
                 {
                     user.role === "admin" ? 
                     <Link to="/admin">
@@ -70,7 +75,7 @@ const Navbar = props =>{
         <>
         <nav className=" navbar navbar-expand-lg navbar-light bg-primary">
             <Link to="/">
-                <div className="navbar-brand m-5 ">Neuoflux</div>
+                <div className="navbar-brand ">Neuoflux</div>
             </Link>
             <div className="collapse navbar-collapse mx-auto " id="navbarText">
                 <ul className="navbar-nav mx-auto">

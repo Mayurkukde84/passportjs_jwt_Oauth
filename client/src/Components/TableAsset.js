@@ -4,14 +4,20 @@ import { GrFormView } from "react-icons/gr";
 import { FiEdit } from "react-icons/fi";
 import { AiFillDelete } from "react-icons/ai";
 import { NavLink,useHistory } from "react-router-dom";
+import { customAlphabet, nanoid } from "nanoid";
+import { model } from "mongoose";
+
 
 const TableAsset = () => {
   const history = useHistory("")
   const [getAssetData, setAssetData] = useState([]);
-  
+
+  model.id = nanoid()
   console.log(getAssetData);
   const [inpAsset, setInpAsset] = useState({
     ItemName: " ",
+    ID: " ",
+    Barcode: " ",
     Descripation: " ",
     Type: " ",
     Mode: " ",
@@ -74,14 +80,14 @@ const TableAsset = () => {
       }),
     });
     const data = await res.json();
-    console.log(data);
+    
 
     if (res.status === 422 || !data) {
       alert("error");
       console.log("error");
     } else {
       alert("data added");
-      console.log("data aaded");
+      
       history.go("/tableasset")
     }
   };
@@ -93,14 +99,14 @@ const TableAsset = () => {
       },
     });
     const data1 = await res.json();
-    console.log(data1);
+  
 
     if (res.status === 422 || !data1) {
       alert("error");
-      console.log("error");
+      
     } else {
       setAssetData(data1);
-      console.log("data aaded");
+      
     }
   };
 
@@ -117,13 +123,13 @@ const TableAsset = () => {
       },
     });
     const deletdata = await res2.json();
-    console.log(deletdata);
+    
 
     if (res2.status === 422 || !deletdata){
       console.log("error")
      
     }else{
-      console.log("user deleted");
+      
       addgetasset(deletdata);
       history.go("/tableasset")
       
@@ -136,7 +142,7 @@ const TableAsset = () => {
   return (
     <>
       <div className="addbutton">
-        <Popup trigger={<button>+ADD</button>} position="bottom center">
+        <Popup trigger={<button>+ADD</button>} position="bottom right">
           {(close) => (
             <div className="container">
               <form className="bg-light p-2 ">
@@ -167,18 +173,19 @@ const TableAsset = () => {
                   </div>
                 </div>
                 <div className="row">
-                  <div className="col form-inline ">
-                    <label for="exampleInputEmail1">Type</label>
+                <div className="col form-inline">
+                    <label for="exampleInputEmail1">Date Of Purchase</label>
                     <input
                       type="text"
                       class="form-control"
                       required="required"
-                      name="Type"
-                      placeholder="Enter a phone number"
+                      name="DateOfPurchase"
+                      placeholder="Enter a GST number"
                       onChange={setAsset}
-                      value={inpAsset.Type}
+                      value={inpAsset.DateOfPurchase}
                     />
                   </div>
+                 
                   <div className="col form-inline">
                     <label for="exampleInputEmail1">Mode</label>
                     <input
@@ -283,17 +290,37 @@ const TableAsset = () => {
                       value={inpAsset.OwnershipDocument}
                     />
                   </div>
-                  <div className="col form-inline">
-                    <label for="exampleInputEmail1">Date Of Purchase</label>
-                    <input
+                  
+                  <div className="col form-inline ">
+                    <label for="exampleInputEmail1">Type</label>
+                    <select class="form-control form-control-sm" type="text"
+                      // class="form-control"
+                      required="required"
+                      name="Type"
+                      placeholder="Enter a phone number"
+                      onChange={setAsset}
+                      value={inpAsset.Type}>
+                    
+                    <option selected>Choose...</option>
+        <option value="Infrastructure">Infrastructure</option>
+        <option value="Consumable">Consumable</option>
+        <option value="Hardware">Hardware</option>
+        <option value="Software">Software</option>
+        <option value="Laptop">Laptop</option>
+                    </select>
+                    {/* <input
                       type="text"
                       class="form-control"
                       required="required"
-                      name="DateOfPurchase"
-                      placeholder="Enter a GST number"
+                      name="Type"
+                      placeholder="Enter a phone number"
                       onChange={setAsset}
-                      value={inpAsset.DateOfPurchase}
-                    />
+                      value={inpAsset.Type}
+
+                    
+                    /> */}
+                     
+                     
                   </div>
                 </div>
 
@@ -314,7 +341,10 @@ const TableAsset = () => {
         <table class="table table-light table-striped ">
           <thead>
             <tr className="text-center">
+
+              <th scope="col">Sr.No.</th>
               <th scope="col">ID</th>
+              <th scope="col">Barcode</th>
               <th scope="col">Item Name</th>
               <th scope="col">Descripation</th>
               <th scope="col">Type</th>
@@ -338,6 +368,8 @@ const TableAsset = () => {
                 <>
                 <tr className="text-center">
               <th scope="row">{id + 1}</th>
+              <td>{nanoid(5)}</td>
+              <td>{nanoid(5)}</td>
               <td>{element.ItemName}</td>
               <td>{element.Descripation}</td>
               <td>{element.Type}</td>

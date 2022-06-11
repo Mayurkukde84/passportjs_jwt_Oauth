@@ -19,14 +19,14 @@ const TableAssetDetails = () => {
           },
         });
         const data2 = await res.json();
-        console.log(data2);
+        
     
         if (res.status === 422 || !data2) {
           alert("error");
-          console.log("error");
+          
         } else {
           setAssetID(data2);
-          console.log("data aaded");
+          
         }
       };
     
@@ -47,7 +47,7 @@ const TableAssetDetails = () => {
           console.log("error");
         } else {
           setAssetID(data2);
-          console.log("get data");
+       
         }
       };
     
@@ -64,14 +64,14 @@ const TableAssetDetails = () => {
           },
         });
         const deletdata = await res2.json();
-        console.log(deletdata);
+        
     
         if (res2.status === 422 || !deletdata){
-          console.log("error")
+          
           history.go("/tableasset")
          
         }else{
-          console.log("user deleted");
+          
           getassetuser(deletdata);
           history.go("/tableasset")
          

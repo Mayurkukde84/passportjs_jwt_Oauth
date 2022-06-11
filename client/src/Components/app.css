@@ -1,11 +1,12 @@
 .navbar {
   height: 50px;
-  background-color: #0D6EFD;
+  background-color: #6b9c09;
   color: white;
   display: flex;
   align-items: center;
   justify-content: space-around;
 }
+
 
 .logo {
   font-size: 20px;
@@ -177,3 +178,9 @@
       margin-left: 92%;
       margin-top: 2%;
     }
+
+    .background{
+      background: #6b9c09;
+      background-size: cover;
+    }
+   

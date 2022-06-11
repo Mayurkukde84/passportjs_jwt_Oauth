@@ -1,5 +1,8 @@
 import React, {createContext,useState,useEffect} from 'react';
 import AuthService from '../Services/AuthService';
+import { TailSpin } from  'react-loader-spinner'
+import "./loader.css"
+
 
 export const AuthContext = createContext();
 
@@ -18,7 +21,12 @@ export default ({ children })=>{
 
     return (
         <div>
-            {!isLoaded ? <h1>Loading</h1> : 
+            {!isLoaded ? <div className='loader'> <TailSpin
+    height="100"
+    width="100"
+    color='#D7415D'
+    ariaLabel='loading'
+  /> </div> : 
             <AuthContext.Provider value={{user,setUser,isAuthenticated,setIsAuthenticated}}>
                 { children }
             </AuthContext.Provider>}

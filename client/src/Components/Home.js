@@ -47,7 +47,9 @@ const Home = props=>{
 
    return(
 
- 
+    
+
+    
     <div className="login mt-5">
     {/* <h1 className="loginTitle">Choose a Login Method</h1> */}
     <div className="wrapper">
@@ -127,7 +129,7 @@ const Home = props=>{
 
             </div>
             
-            <button className="submit bg-primary mt-3" type='submit'>Sign Up</button>
+            <button className="submit bg-primary mt-3 ml-4" type='submit'>Sign Up</button>
           </form>
           {message ? <Message message={message}/> : null}
         </div>
@@ -137,6 +139,7 @@ const Home = props=>{
       </div>
     </div>
   </div>
+  
     )
   }
 

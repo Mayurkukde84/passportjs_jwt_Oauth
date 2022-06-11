@@ -19,7 +19,7 @@ const ParticlesComponent = (props) => {
       interactivity: {
         events: {
           onClick: {
-            enable: true, // enables the click event
+            enable: false, // enables the click event
             mode: "push", // adds the particles on click
           },
           onHover: {
@@ -43,7 +43,7 @@ const ParticlesComponent = (props) => {
         },
         move: {
           enable: true, // enabling this will make particles move in the canvas
-          speed: { min: 1, max: 2 }, // using a range in speed value will make particles move in a random speed between min/max values, each particles have its own value, it won't change in time by default
+          speed: { min: 0.5, max: 1 }, // using a range in speed value will make particles move in a random speed between min/max values, each particles have its own value, it won't change in time by default
         },
         opacity: {
           value: { min: 0.3, max: 0.7 }, // using a different opacity, to have some semitransparent effects
