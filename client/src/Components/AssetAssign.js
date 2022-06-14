@@ -5,9 +5,10 @@ import { FiEdit } from "react-icons/fi";
 import { AiFillDelete } from "react-icons/ai";
 
 import { AuthContext } from '../Context/AuthContext'
+import { initialize } from "passport";
 const AssetAssign = () => {
 
- 
+ const [getMember,setMember] = useState([]);
 
 
   const {user} = useContext(AuthContext);
@@ -18,12 +19,14 @@ const AssetAssign = () => {
   const[getAssignData,setAssignData] = useState([]);
   const [inpAssign,setInpAssign] = useState({
     UserName:user2,
+    Member:" ",
     TaskAssign:" ",
     Descripation:" "
   });
 
   const setAssign = (e) =>{
     const {name,value} = e.target;
+    console.log(value)
     setInpAssign((preval)=>{
       return{
         ...preval,
@@ -38,6 +41,7 @@ const AssetAssign = () => {
     
     const{
       UserName,
+      Member,
       TaskAssign,
       Descripation
     } = inpAssign;
@@ -49,6 +53,7 @@ const AssetAssign = () => {
       },
       body: JSON.stringify({
         UserName,
+        Member,
         TaskAssign,
         Descripation
       }),
@@ -86,6 +91,16 @@ const AssetAssign = () => {
   useEffect(() => {
     addgetAssign();
   },[]);
+
+  useEffect(()=>{
+    const member = async ()=>{
+      const res = await fetch("http://localhost:5000/getmember");
+      const getres = await res.json();
+      console.log(getres)
+      setMember(await getres)
+    }
+    member();
+  },[]);
   
 
 
@@ -100,16 +115,22 @@ const AssetAssign = () => {
               <div className="row p-2 ">
                 <div className="col form-inline p-2">
                   <label for="exampleInputEmail1">Member</label>
-                  <input
-                    type="text"
-                    class="form-control"
+                  <select name="Member" className="form-control p-2" value={inpAssign.Member} onChange={setAssign}>
+                    <option>--Select Member--</option>
                    
-                   
-                    placeholder="Enter a name"
-                    value={user[1]}
-                    onChange={setAssign}
-                    
-                  />
+                    {
+                      getMember.map((m, index)=>{
+                        return(
+                          <option key={index} name="Member">{m.Member}</option>
+
+                        )
+                       
+                      })
+                    }
+                 
+                  
+                  </select>
+                 
                   <input
                     type="hidden"
                     class="form-control"
@@ -178,7 +199,7 @@ const AssetAssign = () => {
             <tr className="text-center">
               <th>{id + 1}</th>
               <td>{assign.UserName}</td>
-              <td>Member</td>
+              <td>{assign.Member}</td>
               <td>{assign.TaskAssign}</td>
               <td>{assign.Descripation}</td>
               <td className="d-flex justify-content-between">

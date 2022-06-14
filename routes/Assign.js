@@ -9,12 +9,13 @@ assignRouter.post("/tableassign", async (req, res) => {
 
 const {
     UserName,
+    Member,
     TaskAssign,
     Descripation
 } = req.body
 
 
-  if (!UserName ||
+  if (!UserName || !Member||
     !TaskAssign ||
     !Descripation) {
     res.status(422).json("plz fill the data");
@@ -27,6 +28,7 @@ const {
     }else{
         const addassign = new assign({
             UserName,
+            Member,
             TaskAssign,
             Descripation
         });
@@ -42,6 +44,7 @@ assignRouter.get("/getassign",async(req,res)=>{
     try{
         const assignUser = await assign.find();
         res.status(201).json(assignUser)
+        console.log(res.body)
         
 
     }catch(error){

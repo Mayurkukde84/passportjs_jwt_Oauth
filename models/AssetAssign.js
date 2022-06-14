@@ -5,6 +5,10 @@ const assignSchema = new mongoose.Schema({
         type:String,
         required:true,
     },
+    Member:{
+        type:String,
+        required:true,
+    },
     TaskAssign:{
         type:String,
         required:true,
