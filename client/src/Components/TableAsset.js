@@ -4,7 +4,7 @@ import { GrFormView } from "react-icons/gr";
 import { FiEdit } from "react-icons/fi";
 import { AiFillDelete } from "react-icons/ai";
 import { NavLink,useHistory } from "react-router-dom";
-import { customAlphabet, nanoid } from "nanoid";
+import {  nanoid } from "nanoid";
 import { model } from "mongoose";
 
 
@@ -13,11 +13,12 @@ const TableAsset = () => {
   const [getAssetData, setAssetData] = useState([]);
 
   model.id = nanoid()
+  
   console.log(getAssetData);
   const [inpAsset, setInpAsset] = useState({
     ItemName: " ",
-    ID: " ",
-    Barcode: " ",
+    ID: nanoid(5),
+    Barcode:nanoid(5),
     Descripation: " ",
     Type: " ",
     Mode: " ",
@@ -46,6 +47,9 @@ const TableAsset = () => {
 
     const {
       ItemName,
+      ID,
+      Barcode,
+      
       Descripation,
       Type,
       Mode,
@@ -66,6 +70,8 @@ const TableAsset = () => {
       },
       body: JSON.stringify({
         ItemName,
+        ID,
+        Barcode,
         Descripation,
         Type,
         Mode,
@@ -149,6 +155,24 @@ const TableAsset = () => {
                 <div className="row p-2 ">
                   <div className="col form-inline p-2">
                     <label for="exampleInputEmail1">Item Name</label>
+                    <input
+                      type="hidden"
+                      class="form-control"
+                      required="required"
+                      name="ItemName"
+                      placeholder="Enter a phone number"
+                      onChange={setAsset}
+                      value={inpAsset.ID}
+                    />
+                    <input
+                      type="hidden"
+                      class="form-control"
+                      required="required"
+                      name="ItemName"
+                      placeholder="Enter a phone number"
+                      onChange={setAsset}
+                      value={inpAsset.Barcode}
+                    />
                     <input
                       type="text"
                       class="form-control"
@@ -368,8 +392,8 @@ const TableAsset = () => {
                 <>
                 <tr className="text-center">
               <th scope="row">{id + 1}</th>
-              <td>{nanoid(5)}</td>
-              <td>{nanoid(5)}</td>
+              <td>{element.ID}</td>
+              <td>{element.Barcode}</td>
               <td>{element.ItemName}</td>
               <td>{element.Descripation}</td>
               <td>{element.Type}</td>

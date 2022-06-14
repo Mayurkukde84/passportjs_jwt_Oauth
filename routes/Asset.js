@@ -4,10 +4,10 @@ const asset = require("../models/AssetSchema")
 
 assetRouter.post("/tableasset", async(req,res) =>{
     console.log(req.body);
-    const {ItemName,Descripation,Type,Mode,Vendor,Receipt,Price,CostCode,ProjectName,
+    const {ItemName,ID,Barcode,Descripation,Type,Mode,Vendor,Receipt,Price,CostCode,ProjectName,
     OwnedBy,OwnershipDocument,DateOfPurchase} = req.body
 
-    if(!ItemName || !Descripation || !Type || !Mode || !Vendor || !Receipt||
+    if(!ItemName || !ID || !Barcode || !Descripation || !Type || !Mode || !Vendor || !Receipt||
         !Price || !CostCode || !ProjectName ||
         !OwnedBy || !OwnershipDocument || !DateOfPurchase){
             res.status(422).json("please fill the all data")
@@ -21,7 +21,8 @@ assetRouter.post("/tableasset", async(req,res) =>{
             res.status(422).json("this user is already present");
         }else{
             const addasset = new asset({
-                ItemName,Descripation,Type,Mode,Vendor,Receipt,Price,CostCode,ProjectName,
+                ItemName,ID,Barcode
+                ,Descripation,Type,Mode,Vendor,Receipt,Price,CostCode,ProjectName,
     OwnedBy,OwnershipDocument,DateOfPurchase
             });
             await addasset.save();

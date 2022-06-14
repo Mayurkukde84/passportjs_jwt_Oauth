@@ -12,6 +12,7 @@ const cookieSession = require("cookie-session")
 const vendor = require("./models/Vendor")
 const asset = require("./models/AssetSchema")
 const employee = require("./models/EmployeeSchema")
+const assign = require("./models/AssetSchema")
 
 mongoose.connect('mongodb+srv://mernauth:1122334455@cluster0.lpllf.mongodb.net/?retryWrites=true&w=majority',{useNewUrlParser : true,useUnifiedTopology: true},()=>{
     console.log('successfully connected to database');
@@ -49,6 +50,9 @@ app.use(assetRouter)
 
 const employeeRouter = require("./routes/Employee")
 app.use(employeeRouter)
+
+const assignRouter = require("./routes/Assign")
+app.use(assignRouter)
 
 app.listen(5000, () => {
   console.log("express server started");

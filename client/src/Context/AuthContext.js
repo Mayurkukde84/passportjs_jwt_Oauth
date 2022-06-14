@@ -16,6 +16,7 @@ export default ({ children })=>{
             setUser(data.user);
             setIsAuthenticated(data.isAuthenticated);
             setIsLoaded(true);
+            
         });
     },[]);
 

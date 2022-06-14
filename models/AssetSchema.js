@@ -2,6 +2,16 @@ const mongoose = require("mongoose");
 
 const assetSchema = new mongoose.Schema({
 
+    ID:{
+        type: String,
+        required:true,
+      
+    },
+    Barcode:{
+        type: String,
+        required:true,
+      
+    },
     ItemName:{
         type: String,
         required:true,

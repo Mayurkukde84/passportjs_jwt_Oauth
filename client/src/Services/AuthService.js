@@ -1,3 +1,4 @@
+import { authenticate } from "passport";
 
 export default {
     login : user =>{
@@ -33,6 +34,7 @@ export default {
     },
     isAuthenticated : ()=>{
         return fetch('/user/authenticated')
+        
                 .then(res=>{
                     if(res.status !== 401)
                         return res.json().then(data => data);
