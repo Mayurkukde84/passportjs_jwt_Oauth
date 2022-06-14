@@ -12,6 +12,8 @@ const AssetAssign = () => {
 
   const {user} = useContext(AuthContext);
   console.log(user)
+
+
   const user2 = user.username
   const[getAssignData,setAssignData] = useState([]);
   const [inpAssign,setInpAssign] = useState({
@@ -84,6 +86,7 @@ const AssetAssign = () => {
   useEffect(() => {
     addgetAssign();
   },[]);
+  
 
 
   
@@ -96,16 +99,17 @@ const AssetAssign = () => {
             <form className="bg-light p-2 ">
               <div className="row p-2 ">
                 <div className="col form-inline p-2">
-                  <label for="exampleInputEmail1">UserName</label>
-                  {/* <input
+                  <label for="exampleInputEmail1">Member</label>
+                  <input
                     type="text"
                     class="form-control"
                    
                    
                     placeholder="Enter a name"
-                    value={user.username}
+                    value={user[1]}
+                    onChange={setAssign}
                     
-                  /> */}
+                  />
                   <input
                     type="hidden"
                     class="form-control"

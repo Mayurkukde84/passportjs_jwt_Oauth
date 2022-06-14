@@ -48,6 +48,9 @@ app.use(venderRouter)
 const assetRouter = require("./routes/Asset")
 app.use(assetRouter)
 
+const memberRouter = require("./routes/Member")
+app.use(memberRouter)
+
 const employeeRouter = require("./routes/Employee")
 app.use(employeeRouter)
 

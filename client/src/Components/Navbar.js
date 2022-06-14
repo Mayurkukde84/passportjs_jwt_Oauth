@@ -5,7 +5,10 @@ import { AuthContext } from '../Context/AuthContext';
 import "./nav.css"
 const Navbar = props =>{
     const {isAuthenticated,user,setIsAuthenticated,setUser} = useContext(AuthContext);
-    
+    const users = user.username
+    console.log(users)
+
+
     const onClickLogoutHandler = ()=>{
         AuthService.logout().then(data=>{
             if(data.success){
@@ -14,6 +17,10 @@ const Navbar = props =>{
             }
         });
     }
+
+    
+
+    
 
     const unauthenticatedNavBar = ()=>{
         return (
@@ -24,10 +31,11 @@ const Navbar = props =>{
                     </li>
                 </Link>  
                 <Link to="/login">
-                    <li className="nav-item nav-link">
+                    <li className="nav-item nav-link text-lg-left">
                         Login
                     </li>
                 </Link>  
+                
                 <Link to="/register">
                     <li className="nav-item nav-link">
                         Register
