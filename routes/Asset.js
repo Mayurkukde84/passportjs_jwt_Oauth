@@ -1,38 +1,112 @@
 const express = require("express");
 const assetRouter = express.Router();
 const asset = require("../models/AssetSchema")
+const multer = require('multer');
+const { v4: uuidv4} = require('uuid')
+const path = require("path");
+const User = require("../models/User");
 
-assetRouter.post("/tableasset", async(req,res) =>{
-    console.log(req.body);
-    const {ItemName,ID,Barcode,Descripation,Type,Mode,Vendor,Receipt,Price,CostCode,ProjectName,
-    OwnedBy,OwnershipDocument,DateOfPurchase} = req.body
+const storage = multer.diskStorage({
+    destination: function(req,file,cb){
+        cb(null,'images')
+    },
+    filename: function (req,file,cb){
+        cb(null,uuidv4()+ '-' + Date.now() +  path.extname(file.originalname))
+    }
+});
 
-    if(!ItemName || !ID || !Barcode || !Descripation || !Type || !Mode || !Vendor || !Receipt||
-        !Price || !CostCode || !ProjectName ||
-        !OwnedBy || !OwnershipDocument || !DateOfPurchase){
-            res.status(422).json("please fill the all data")
-        }
+const filefilter = (req,file,cb) =>{
+    const allowedFileTypes = ['images/jpeg','images/jpg','images/png','application/pdf'];
+    if(allowedFileTypes.includes(file.mimetype)){
+        cb(null,true)
+    }else{
+        cb(null,false)
+    }
+}
 
-    try{
-        const preasset = await asset.findOne({ ItemName:ItemName});
+let upload = multer({ storage, filefilter })
+
+assetRouter.route("/tableasset").post(upload.single("OwnershipDocument"), (req,res) =>{
+   
+   const ID = req.body.ID;
+    const Barcode = req.body.Barcode;
+    const ItemName = req.body.ItemName;
+    const Descripation = req.body.Descripation;
+    const Type = req.body.Type;
+    const Mode = req.body.Mode;
+    const Vendor = req.body.Vendor;
+    const Receipt = req.body.Receipt;
+    const Price = req.body.Price;
+    const CostCode = req.body.CostCode;
+    const ProjectName = req.body.ProjectName;
+    const OwnedBy = req.body.OwnedBy;
+
+    const OwnershipDocument = req.file.filename;
+    const DateOfPurchase = req.body.DateOfPurchase;
+
+   const newUserData = {
+    ID,
+    Barcode,
+    ItemName,
+    Descripation,
+    Type,
+    Mode,
+    Vendor,
+    Receipt,
+    Price,
+    CostCode,
+    ProjectName,
+    OwnedBy,
+    OwnershipDocument,
+    DateOfPurchase
+   }
+
+   const newUser = new asset(newUserData)
+   console.log(newUser)
+   newUser.save()
+   .then(()=> res.json('user added'))
+   .catch(err => res.status(400).json('Error:' + err));
+
+   
+
+   
+   
+   
+   
+   
+    // console.log(req.body);
+    // console.log(req.file)
+    // const OwnershipDocument = req.file.originalname;
+    // const {ItemName,ID,Barcode,Descripation,Type,Mode,Vendor,Receipt,Price,CostCode,ProjectName,
+    // OwnedBy,DateOfPurchase} = req.body
+
+    // // if(!ItemName || !ID || !Barcode || !Descripation || !Type || !Mode || !Vendor || !Receipt||
+    // //     !Price || !CostCode || !ProjectName ||
+    // //     !OwnedBy  || !DateOfPurchase){
+    // //         res.status(422).json("please fill the all data")
+    // //     }
+
+    // try{
+    //     const preasset = await asset.findOne({ ItemName:ItemName});
         
 
-        if(preasset){
-            res.status(422).json("this user is already present");
-        }else{
-            const addasset = new asset({
-                ItemName,ID,Barcode
-                ,Descripation,Type,Mode,Vendor,Receipt,Price,CostCode,ProjectName,
-    OwnedBy,OwnershipDocument,DateOfPurchase
-            });
-            await addasset.save();
-            res.status(201).json(addasset);
+    //     if(preasset){
+    //         res.status(422).json("this user is already present");
+    //     }else{
+    //         const addasset = new asset({
+    //             ItemName,ID,Barcode
+    //             ,Descripation,Type,Mode,Vendor,Receipt,Price,CostCode,ProjectName,
+    // OwnedBy,OwnershipDocument,DateOfPurchase
+    //         });
+    //         await addasset.save();
+    //         res.status(201).json(addasset);
             
-        }
+    //     }
 
-    }catch (error){
-        res.status(422).json(error)
-    }
+    // }catch (error){
+    //     res.status(422).json(error)
+    // }
+
 
 })
 

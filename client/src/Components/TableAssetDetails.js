@@ -73,7 +73,7 @@ const TableAssetDetails = () => {
         }else{
           
           getassetuser(deletdata);
-          history.go("/tableasset")
+          history.push("/tableasset")
          
           
         }

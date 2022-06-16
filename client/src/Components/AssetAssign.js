@@ -3,13 +3,13 @@ import Popup from "reactjs-popup";
 import { GrFormView } from "react-icons/gr";
 import { FiEdit } from "react-icons/fi";
 import { AiFillDelete } from "react-icons/ai";
-
+import { NavLink,useHistory } from "react-router-dom";
 import { AuthContext } from '../Context/AuthContext'
 import { initialize } from "passport";
 const AssetAssign = () => {
 
  const [getMember,setMember] = useState([]);
-
+ const history = useHistory("")
 
   const {user} = useContext(AuthContext);
   console.log(user)
@@ -65,6 +65,7 @@ const AssetAssign = () => {
       alert("error")
     }else{
       alert("data added")
+      history.go("/tableassign")
     }
 
   }
@@ -96,11 +97,34 @@ const AssetAssign = () => {
     const member = async ()=>{
       const res = await fetch("http://localhost:5000/getmember");
       const getres = await res.json();
-      console.log(getres)
+      
       setMember(await getres)
     }
     member();
   },[]);
+
+  const assigndelet = async (id) =>{
+    const res3 = await fetch(`http://localhost:5000/getassigndelet/${id}`,{
+      method:"DELETE",
+      headers:{
+        "Content-Type":"application/json",
+
+      },
+    });
+    const deletassigndata = await res3.json();
+    
+
+    if (res3.status === 422 || !deletassigndata){
+      console.log("error")
+     
+    }else{
+      console.log("user deleted");
+      addgetAssign(deletassigndata);
+      history.go("/tableassign")
+      
+    }
+
+  }
   
 
 
@@ -211,9 +235,9 @@ const AssetAssign = () => {
                   <FiEdit />
                 </button>
 
-                <button className="btn btn-danger">
-                  <AiFillDelete />
-                </button>
+                <button className="btn btn-danger" onClick={()=>assigndelet(assign._id)}>
+                        <AiFillDelete />
+                      </button>
               </td>
             </tr>
             </>

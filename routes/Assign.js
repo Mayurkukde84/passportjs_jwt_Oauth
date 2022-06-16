@@ -53,4 +53,40 @@ assignRouter.get("/getassign",async(req,res)=>{
     }
 })
 
+assignRouter.get("getassign/:id",async(req,res)=>{
+  try{
+    const {id} = req.params;
+    const assignuser = await assign.findById({_id:id});
+    res.status(422).json(assignuser)
+  }catch(error){
+    res.status(422).json(error)
+  }
+})
+
+assignRouter.patch("/getassignedit/:id",async (req,res)=>{
+  try {
+    const {id} = req.params;
+    const updateassign = await assign.findByIdAndUpdate(id,req.body,{
+      new:true
+    })
+    res.status(201).json(updateassign)
+  } catch (error) {
+    res.status(422).json(error)
+    
+  }
+})
+
+assignRouter.delete("/getassigndelet/:id", async(req,res)=>{
+  try{
+    const {id} = req.params;
+    const getassigndelet = await assign.findByIdAndUpdate({_id:id});
+    res.status(201).json(getassigndelet)
+  }catch{
+    res.status(422).json(error)
+  }
+})
+
+
+
+
 module.exports = assignRouter

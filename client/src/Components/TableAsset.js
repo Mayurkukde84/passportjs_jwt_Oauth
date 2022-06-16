@@ -6,13 +6,13 @@ import { AiFillDelete } from "react-icons/ai";
 import { NavLink,useHistory } from "react-router-dom";
 import {  nanoid } from "nanoid";
 import { model } from "mongoose";
-
+import axios from 'axios';
 
 const TableAsset = () => {
   const history = useHistory("")
   const [getAssetData, setAssetData] = useState([]);
 
-  model.id = nanoid()
+  // model.id = nanoid()
   
   console.log(getAssetData);
   const [inpAsset, setInpAsset] = useState({
@@ -29,7 +29,7 @@ const TableAsset = () => {
     ProjectName: " ",
     OwnedBy: " ",
     OwnershipDocument: " ",
-    DateOfPurchase: " ",
+     DateOfPurchase: " ",
   });
 
   const setAsset = (e) => {
@@ -42,60 +42,43 @@ const TableAsset = () => {
     });
   };
 
-  const addinpasset = async (e) => {
-    e.preventDefault();
+  const handlePhoto = (e) =>{
+    setInpAsset({...inpAsset,OwnershipDocument: e.target.files[0]})
+    console.log(inpAsset.OwnershipDocument)
+  }
 
-    const {
-      ItemName,
-      ID,
-      Barcode,
-      
-      Descripation,
-      Type,
-      Mode,
-      Vendor,
-      Receipt,
-      Price,
-      CostCode,
-      ProjectName,
-      OwnedBy,
-      OwnershipDocument,
-      DateOfPurchase,
-    } = inpAsset;
+  const addinpasset =  (e) => {
+   e.preventDefault();
+   
+   const formData = new FormData();
+  
+   formData.append('ID',inpAsset.ID)
+   formData.append('Barcode',inpAsset.Barcode)
+   formData.append('ItemName',inpAsset.ItemName)
+   formData.append('Descripation',inpAsset.Descripation)
+   formData.append('Type',inpAsset.Type)
+   formData.append('Mode',inpAsset.Mode)
+   formData.append('Vendor',inpAsset.Vendor)
+   formData.append('Receipt',inpAsset.Receipt)
+   formData.append('Price',inpAsset.Price)
+   formData.append('CostCode',inpAsset.CostCode)
+   formData.append('ProjectName',inpAsset.ProjectName)
+   formData.append('OwnedBy',inpAsset.OwnedBy)
+   formData.append('OwnershipDocument',inpAsset.OwnershipDocument)
+   formData.append('DateOfPurchase',inpAsset.DateOfPurchase)
+   console.log(inpAsset.OwnershipDocument)
 
-    const res = await fetch("http://localhost:5000/tableasset", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        ItemName,
-        ID,
-        Barcode,
-        Descripation,
-        Type,
-        Mode,
-        Vendor,
-        Receipt,
-        Price,
-        CostCode,
-        ProjectName,
-        OwnedBy,
-        OwnershipDocument,
-        DateOfPurchase,
-      }),
-    });
-    const data = await res.json();
-    
-
-    if (res.status === 422 || !data) {
-      alert("error");
-      console.log("error");
-    } else {
-      alert("data added");
-      
-      history.go("/tableasset")
+   axios.post('http://localhost:5000/tableasset',formData)
+   .then(res =>{
+    console.log(res)
+    history.go("/tableasset")
+   })
+   .catch(
+    err =>{
+      alert("error assettable")
+      console.log(err)
     }
+   )
   };
   const addgetasset = async (e) => {
     const res = await fetch("http://localhost:5000/getasset", {
@@ -151,7 +134,7 @@ const TableAsset = () => {
         <Popup trigger={<button>+ADD</button>} position="bottom right">
           {(close) => (
             <div className="container">
-              <form className="bg-light p-2 ">
+              <form  className="bg-light p-2 " onSubmit={addinpasset} enctype="multipart/form-data">
                 <div className="row p-2 ">
                   <div className="col form-inline p-2">
                     <label for="exampleInputEmail1">Item Name</label>
@@ -305,13 +288,14 @@ const TableAsset = () => {
                   <div className="col form-inline ">
                     <label for="exampleInputEmail1">Ownership Document</label>
                     <input
-                      type="text"
-                      class="form-control"
-                      required="required"
+                      type="file"
+                      
                       name="OwnershipDocument"
-                      placeholder="Enter a phone number"
-                      onChange={setAsset}
-                      value={inpAsset.OwnershipDocument}
+                      accept="image/*,.pdf"
+                    
+                     
+                      onChange={handlePhoto}
+                     
                     />
                   </div>
                   
@@ -351,7 +335,7 @@ const TableAsset = () => {
                 <button
                   type="submit"
                   class="btn btn-primary"
-                  onClick={addinpasset}
+                
                 >
                   Submit
                 </button>
