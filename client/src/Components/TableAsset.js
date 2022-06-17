@@ -18,7 +18,7 @@ const TableAsset = () => {
   const [inpAsset, setInpAsset] = useState({
     ItemName: " ",
     ID: nanoid(5),
-    Barcode:nanoid(5),
+    Barcode:" ",
     Descripation: " ",
     Type: " ",
     Mode: " ",
@@ -75,11 +75,12 @@ const TableAsset = () => {
    })
    .catch(
     err =>{
-      alert("error assettable")
+      
       console.log(err)
     }
    )
   };
+  
   const addgetasset = async (e) => {
     const res = await fetch("http://localhost:5000/getasset", {
       method: "GET",
@@ -164,6 +165,17 @@ const TableAsset = () => {
                       placeholder="Enter a phone number"
                       onChange={setAsset}
                       value={inpAsset.ItemName}
+                    />
+                  </div>
+                  <div className="col form-inline p-2">
+                    <label for="exampleInputEmail1">Barcode</label>
+                    <input
+                      type="number"
+                      class="form-control"
+                      name="Barcode"
+                      placeholder="Scan Barcode"
+                      onChange={setAsset}
+                      value={inpAsset.Barcode}
                     />
                   </div>
                   <div className="col form-inline p-2">

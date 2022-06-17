@@ -8,7 +8,7 @@ const assetSchema = new mongoose.Schema({
       
     },
     Barcode:{
-        type: String,
+        type: Number,
     
       
     },
