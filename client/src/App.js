@@ -20,6 +20,8 @@ import Employee from './Components/Employee';
 import EmployeeDetails from './Components/EmployeeDetails';
 import EmployeeEdit from './Components/EmployeeEdit';
 import AssetAssign from './Components/AssetAssign';
+import AssignDetails from './Components/AssignDetails';
+import AssignEdit from './Components/AssignEdit';
 
 
 
@@ -49,6 +51,8 @@ function App() {
       <PrivateRoute path="/tableassetedit/:id" roles={["user","admin"]} component={TableAssetEdit}/>
 
       <PrivateRoute path="/assetassign" roles={["user","admin"]} component={AssetAssign}/>
+      <PrivateRoute path="/tableassigndetails/:id" roles={["user","admin"]} component={AssignDetails}/>
+      <PrivateRoute path="/tableassignedit/:id" roles={["user","admin"]} component={AssignEdit}/>
       
 
       <PrivateRoute path="/tablevendor" roles={["user","admin"]} component={Vendor}/>

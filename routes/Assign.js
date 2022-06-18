@@ -1,7 +1,7 @@
 const express = require("express");
 const assignRouter = express.Router();
 const assign = require("../models/AssetAssign");
-const User = require("../models/User");
+
 
 
 
@@ -12,7 +12,7 @@ const {
     Member,
     TaskAssign,
     Descripation
-} = req.body
+} = req.body;
 
 
   if (!UserName || !Member||
@@ -44,7 +44,7 @@ assignRouter.get("/getassign",async(req,res)=>{
     try{
         const assignUser = await assign.find();
         res.status(201).json(assignUser)
-        console.log(res.body)
+       
         
 
     }catch(error){
@@ -53,15 +53,18 @@ assignRouter.get("/getassign",async(req,res)=>{
     }
 })
 
-assignRouter.get("getassign/:id",async(req,res)=>{
-  try{
+assignRouter.get("/getassigndetails/:id", async (req, res) => {
+  try {
+    
     const {id} = req.params;
-    const assignuser = await assign.findById({_id:id});
-    res.status(422).json(assignuser)
-  }catch(error){
-    res.status(422).json(error)
+    const assignuserid = await assign.findById({_id:id});
+    
+    res.status(201).json(assignuserid)
+  } catch (error) {
+    res.status(422).json(error);
   }
-})
+});
+
 
 assignRouter.patch("/getassignedit/:id",async (req,res)=>{
   try {
@@ -79,7 +82,7 @@ assignRouter.patch("/getassignedit/:id",async (req,res)=>{
 assignRouter.delete("/getassigndelet/:id", async(req,res)=>{
   try{
     const {id} = req.params;
-    const getassigndelet = await assign.findByIdAndUpdate({_id:id});
+    const getassigndelet = await assign.findByIdAndDelete({_id:id});
     res.status(201).json(getassigndelet)
   }catch{
     res.status(422).json(error)

@@ -22,7 +22,7 @@ export default ({ children })=>{
 
     return (
         <div>
-            {!isLoaded ? <div className='loader'> <TailSpin
+            {!isLoaded ? <div className='loader'><h3>Please Relod Page...</h3><TailSpin
     height="100"
     width="100"
     color='#D7415D'

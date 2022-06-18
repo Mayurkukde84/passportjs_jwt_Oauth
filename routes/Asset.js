@@ -66,48 +66,6 @@ assetRouter.route("/tableasset").post(upload.single("OwnershipDocument"), (req,r
    newUser.save()
    .then(()=> res.json('user added'))
    .catch(err => res.status(400).json('Error:' + err));
-
-   
-
-   
-   
-   
-   
-   
-    // console.log(req.body);
-    // console.log(req.file)
-    // const OwnershipDocument = req.file.originalname;
-    // const {ItemName,ID,Barcode,Descripation,Type,Mode,Vendor,Receipt,Price,CostCode,ProjectName,
-    // OwnedBy,DateOfPurchase} = req.body
-
-    // // if(!ItemName || !ID || !Barcode || !Descripation || !Type || !Mode || !Vendor || !Receipt||
-    // //     !Price || !CostCode || !ProjectName ||
-    // //     !OwnedBy  || !DateOfPurchase){
-    // //         res.status(422).json("please fill the all data")
-    // //     }
-
-    // try{
-    //     const preasset = await asset.findOne({ ItemName:ItemName});
-        
-
-    //     if(preasset){
-    //         res.status(422).json("this user is already present");
-    //     }else{
-    //         const addasset = new asset({
-    //             ItemName,ID,Barcode
-    //             ,Descripation,Type,Mode,Vendor,Receipt,Price,CostCode,ProjectName,
-    // OwnedBy,OwnershipDocument,DateOfPurchase
-    //         });
-    //         await addasset.save();
-    //         res.status(201).json(addasset);
-            
-    //     }
-
-    // }catch (error){
-    //     res.status(422).json(error)
-    // }
-
-
 })
 
 assetRouter.get("/getasset", async (req, res) => {

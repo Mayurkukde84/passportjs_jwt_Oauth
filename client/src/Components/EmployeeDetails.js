@@ -82,7 +82,7 @@ const EmployeeDetails = () => {
   
     <div className="center p-4 mt-1 d-flex">
       
-      <Card sx={{ maxWidth: 345 }}>
+      <Card sx={{ maxWidth: 500 }}>
         <CardContent>
           <TableHead>
             <TableCol>

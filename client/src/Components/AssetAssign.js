@@ -132,6 +132,7 @@ const AssetAssign = () => {
 
   return (
     <>
+    <div className="center mt-3"><h4>Assign Task To Members</h4></div>
       <div className="addbutton">
         <Popup trigger={<button>+ADD</button>} position="bottom center">
           <div className="container">
@@ -227,13 +228,19 @@ const AssetAssign = () => {
               <td>{assign.TaskAssign}</td>
               <td>{assign.Descripation}</td>
               <td className="d-flex justify-content-between">
+              <NavLink to ={`tableassigndetails/${assign._id}`}>
                 <button className="btn btn-success">
                   <GrFormView />
                 </button>
+              </NavLink>
 
+                <NavLink to={`/tableassignedit/${assign._id}`}>
                 <button className="btn btn-primary">
                   <FiEdit />
                 </button>
+
+                </NavLink>
+              
 
                 <button className="btn btn-danger" onClick={()=>assigndelet(assign._id)}>
                         <AiFillDelete />

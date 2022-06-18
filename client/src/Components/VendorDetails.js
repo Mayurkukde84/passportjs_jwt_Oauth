@@ -5,10 +5,10 @@ import CardContent from "@mui/material/CardContent";
 import TableHead from "@mui/material/TableHead";
 import TableCol from "@mui/material/TableRow";
 import Button from "@mui/material/Button";
-import Typography from "@mui/material/Typography";
+
 import { useParams } from "react-router";
 import { NavLink, useHistory } from "react-router-dom";
-import { use } from "passport";
+
 import TableCell from "@mui/material/TableCell";
 
 export default function VendorDetails() {
