@@ -148,15 +148,7 @@ const TableAsset = () => {
                       onChange={setAsset}
                       value={inpAsset.ID}
                     />
-                    <input
-                      type="hidden"
-                      class="form-control"
-                      required="required"
-                      name="ItemName"
-                      placeholder="Enter a phone number"
-                      onChange={setAsset}
-                      value={inpAsset.Barcode}
-                    />
+                   
                     <input
                       type="text"
                       class="form-control"

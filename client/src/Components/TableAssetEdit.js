@@ -6,6 +6,7 @@ const TableAssetEdit = () => {
   const history = useHistory("")
     const [inpAsset, setInpAsset] = useState({
         ItemName: " ",
+        Barcode:" ",
         Descripation: " ",
         Type: " ",
         Mode: " ",
@@ -59,7 +60,7 @@ const TableAssetEdit = () => {
         const{
             
           ItemName,Descripation,Type,Mode,Vendor,Receipt,Price,CostCode,ProjectName,
-          OwnedBy,OwnershipDocument,DateOfPurchase
+          OwnedBy,OwnershipDocument,DateOfPurchase,Barcode
           } =inpAsset;
         const res2 = await fetch(`http://localhost:5000/getassetedit/${id}`,{
             method:"PATCH",
@@ -69,7 +70,7 @@ const TableAssetEdit = () => {
             body:JSON.stringify({
                
               ItemName,Descripation,Type,Mode,Vendor,Receipt,Price,CostCode,ProjectName,
-              OwnedBy,OwnershipDocument,DateOfPurchase
+              OwnedBy,OwnershipDocument,DateOfPurchase,Barcode
             })
         })
         const data2 = await res2.json();
@@ -106,6 +107,18 @@ const TableAssetEdit = () => {
                       placeholder="Enter a phone number"
                       onChange={setAsset}
                       value={inpAsset.ItemName}
+                    />
+                  </div>
+                  <div className="col form-inline p-2">
+                    <label for="exampleInputEmail1">Barcode</label>
+                    <input
+                      type="number"
+                      class="form-control"
+                      
+                      name="Barcode"
+                      placeholder="Scan Barcode"
+                      onChange={setAsset}
+                      value={inpAsset.Barcode}
                     />
                   </div>
                   <div className="col form-inline p-2">
