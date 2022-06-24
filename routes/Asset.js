@@ -1,6 +1,7 @@
 const express = require("express");
 const assetRouter = express.Router();
 const asset = require("../models/AssetSchema")
+
 const multer = require('multer');
 const { v4: uuidv4} = require('uuid')
 const path = require("path");
@@ -58,7 +59,8 @@ assetRouter.route("/tableasset").post(upload.single("OwnershipDocument"), (req,r
     ProjectName,
     OwnedBy,
     OwnershipDocument,
-    DateOfPurchase
+    DateOfPurchase,
+    
    }
 
    const newUser = new asset(newUserData)
@@ -90,6 +92,7 @@ assetRouter.get("/getasset", async (req, res) => {
     }
   });
 
+
  
   assetRouter.patch("/getassetedit/:id",async(req,res)=>{
     try{
@@ -117,5 +120,19 @@ assetRouter.delete("/getassetdelet/:id",async(req,res)=>{
     
 })
 
+assetRouter.post("/tableasset/:id/comment",async(req,res)=>{
+  const { id } = req.params;
+  const {Comments} = req.body.Comments;
+  console.log(Comments)
+
+  const post = await asset.findById(id);
+
+  post.Comments.push(Comments);
+
+  const updatepost = await asset.findByIdAndUpdate(id,post,{new:true});
+
+  res.json(updatepost)
+
+})
 
 module.exports = assetRouter

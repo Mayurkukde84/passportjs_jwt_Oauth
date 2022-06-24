@@ -1,18 +1,24 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import Card from "@mui/material/Card";
 import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
 import { useParams } from "react-router";
 import Button from "@mui/material/Button";
-import Typography from "@mui/material/Typography";
+
 import TableHead from "@mui/material/TableHead";
 import TableCol from "@mui/material/TableRow";
 import TableCell from "@mui/material/TableCell";
 import { NavLink, useHistory } from "react-router-dom";
+import { AuthContext } from "../Context/AuthContext";
+import Comment from "./Comment";
 const TableAssetDetails = () => {
   const history = useHistory("");
   const [getAssetID, setAssetID] = useState([]);
+  const [getCommentID, setCommentID] = useState([]);
   const { id } = useParams(" ");
+  const { user } = useContext(AuthContext);
+  const user2 = user.username;
+  // console.log(getAssetID._id);
   const addgetassetid = async () => {
     const res = await fetch(`http://localhost:5000/getasset/${id}`, {
       method: "GET",
@@ -72,10 +78,9 @@ const TableAssetDetails = () => {
 
   return (
     <>
-    <div className="center mt-3">
-    <h4>Here is {getAssetID.ItemName}   Details</h4>
-
-    </div>
+      <div className="center mt-3">
+        <h4>Here is {getAssetID.ItemName} Details</h4>
+      </div>
       <div className="center p-5 mt-3">
         <Card sx={{ maxWidth: 500 }}>
           <CardContent>
@@ -208,9 +213,12 @@ const TableAssetDetails = () => {
             >
               Delete
             </Button>
+            <div></div>
           </CardActions>
         </Card>
       </div>
+
+      <Comment  />
     </>
   );
 };

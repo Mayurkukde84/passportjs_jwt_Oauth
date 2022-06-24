@@ -61,7 +61,8 @@ const assetSchema = new mongoose.Schema({
     DateOfPurchase: {
         type: String,
         
-    }
+    },
+    Comments: { type: [String], default: [] },
 
 });
 
