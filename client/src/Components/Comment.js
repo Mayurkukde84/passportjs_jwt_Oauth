@@ -1,86 +1,103 @@
-import React,{ useState} from 'react';
-import Box from '@mui/material/Box';
-import TextField from '@mui/material/TextField';
-import Typography from "@mui/material/Typography";
+import React,{ useState,useEffect} from 'react';
+
 import { Button } from '@mui/material';
 import { useParams } from "react-router";
 
 const Comment = () => {
-  // console.log(post)
-  const {id} = useParams(" ")
+  const { id } = useParams(' ');
+  const [commentData, setCommentData] = useState(null);
+  const [inpComments, setComments] = useState({
+      Comments: ' ',
+  });
 
-  const [inpComments,setComments] = useState({
-    Comments:" ",
-  })
+  useEffect(() => {
+      fetchCommentData();
+  }, []);
 
-  const setComment = (e) =>{
-    const {name,value} = e.target;
-    console.log(value)
-    setComments((preval)=>{
-      return{
-        ...preval,
-        [name]:value,
-      }
-    })
-
+  function setComment(e) {
+      const { name, value } = e.target;
+      setComments(preval => {
+          return {
+              ...preval,
+              [name]: value,
+          };
+      });
   }
 
-  const addcomments = async (e) => {
-    e.preventDefault();
+  function addComments(e) {
+      e.preventDefault();
+      const { Comments } = inpComments;
+      fetch(`http://localhost:5000/tableasset/${id}/comment`, {
+          method: 'POST',
+          headers: {
+              'Content-Type': 'application/json',
+              Accept: 'application/json',
+          },
+          body: JSON.stringify({
+              Comments,
+          }),
+      })
+          .then(async res => {
+              const data = await res.json();
+              if (!res.ok) {
+                  throw new Error(
+                      res.statusText | 'Oops! Something went wrong'
+                  );
+              }
+              return data;
+          })
+          .then(data => {
+              // @TODO - add new comment to commentData
+          })
+          .catch(err => console.log(err.message));
+  }
 
-    const { Comments } = inpComments;
-
-    const res = await fetch(`http://localhost:5000//tableasset/${id}/comment`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        'Accept': 'application/json'
-      },
-      body: JSON.stringify({
-       Comments,
-      }),
-    });
-    const data = await res.json();
-    console.log(data);
-
-    if (res.status === 422 || !data) {
-      alert("error");
-      console.log("error");
-    } else {
-      alert("data added");
-      console.log("data aaded");
-      
-    }
-  };
-
-
-
-
-
+  function fetchCommentData() {
+      fetch(`/tableasset/${id}/comment/${id}`, {
+          method: 'GET',
+          headers: {
+              'Content-Type': 'application/json',
+          },
+      })
+          .then(async res => {
+              const data = await res.json();
+              if (!res.ok) {
+                  throw new Error(
+                      res.statusText | 'Oops! Something went wrong'
+                  );
+              }
+              return data;
+          })
+          .then(setCommentData)
+          .catch(err => console.log(err.message));
+  }
 
   return (
-    <>
-     <div className="col form-inline p-2">
-                    <label for="exampleInputEmail1">ID</label>
-                    <input
-                      type="text"
-                      class="form-control"
-                      required="required"
-                      name="Comments"
-                      placeholder="Enter a ID"
-                      value={inpComments.Comments}
-                      onChange={setComment}
-                    />
+      <>
+          <h4>Here is {commentData?.ProjectName} Employee Details</h4>
+          <div className='col form-inline p-2'>
+              <label for='exampleInputEmail1'>Comments</label>
+              <input
+                  type='text'
+                  class='form-control'
+                  required='required'
+                  name='Comments'
+                  placeholder='Enter a ID'
+                  value={inpComments.Comments}
+                  onChange={setComment}
+              />
+          </div>
+
+          <Button onClick={addComments}>Submit</Button>
+          {commentData?.Comments.map(comment => {
+              return (
+                  <div>
+                      <p>{comment}</p>{' '}
                   </div>
-     
-   
-  
-    <Button onClick={addcomments}>Submit</Button>
+              );
+          })}
+      </>
+  );
+};
 
-
-    </>
-  
-  )
-}
-
-export default Comment
+export default Comment;

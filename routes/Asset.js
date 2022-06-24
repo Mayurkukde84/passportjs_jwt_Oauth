@@ -122,7 +122,7 @@ assetRouter.delete("/getassetdelet/:id",async(req,res)=>{
 
 assetRouter.post("/tableasset/:id/comment",async(req,res)=>{
   const { id } = req.params;
-  const {Comments} = req.body.Comments;
+  const Comments = req.body.Comments;
   console.log(Comments)
 
   const post = await asset.findById(id);
@@ -135,4 +135,14 @@ assetRouter.post("/tableasset/:id/comment",async(req,res)=>{
 
 })
 
+assetRouter.get("/tableasset/:id/comment/:id",async(req,res)=>{
+  try{
+    const {id} = req.params;
+    const getcomment = await asset.findById({_id:id});
+
+    res.status(201).json(getcomment)
+  }catch(error){
+    res.status(422).json(error)
+  }
+})
 module.exports = assetRouter
