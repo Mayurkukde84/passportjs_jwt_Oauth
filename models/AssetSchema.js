@@ -62,7 +62,11 @@ const assetSchema = new mongoose.Schema({
         type: String,
         
     },
+   
     Comments: { type: [String], default: [] },
+    UserComments: { type: [String], default: [] },
+    
+    
 
 });
 
