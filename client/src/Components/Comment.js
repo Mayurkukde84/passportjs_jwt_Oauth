@@ -85,7 +85,7 @@ const Comment = () => {
           class="form-control"
           required="required"
           name="Comments"
-          placeholder="Enter a ID"
+          placeholder="Enter a Comment"
           value={inpComments.Comments}
           onChange={setComment}
         />
@@ -96,7 +96,7 @@ const Comment = () => {
           class="form-control"
           required="required"
           name="UserComments"
-          placeholder="Enter a ID"
+          placeholder=""
           value={inpComments.UserName}
           onChange={setComment}
         />
@@ -105,9 +105,9 @@ const Comment = () => {
       <button onClick={addComments} className="btn btn-primary ">
         Submit
       </button>
-      <div className="comment-user">
-        <div className="user">
-          {/* {commentData?.UserComments.map((user) => {
+      {/* <div className="comment-user">
+        <div className="user"> */}
+      {/* {commentData?.UserComments.map((user) => {
             return (
               <div class="user-box">
                 <p>{user} : </p>
@@ -124,20 +124,35 @@ const Comment = () => {
             );
           })} */}
 
-          <div className="comments">
-            {commentData?.Comments.map((comment, index) => {
-              return (
-                <>
+      <div className="comments">
+        {commentData?.Comments.map((comment, index) => {
+          if (user2 == commentData.UserComments[index]) {
+            console.log(index)
+            return (
+              <div className="left-box">
+                <div className="comment-content-left"><span>{comment}</span></div>
+
+                <div className="user-left">
+                  <span>{commentData.UserComments[index]}</span>
+                </div>
+              </div>
+            );
+          } else {
+            return (
+              <>
                 <div className="comment-content">{comment}</div>
-                 <div className="user"><span>{commentData.UserComments[index]}</span></div> 
-                  
-                </>
-              );
-            })}
-          </div>
-        </div>
+
+                <div className="user">
+                  <span>{commentData.UserComments[index]}</span>
+                </div>
+              </>
+            );
+          }
+        })}
       </div>
     </div>
+    //   </div>
+    // </div>
   );
 };
 

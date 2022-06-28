@@ -7,10 +7,10 @@ import Popup from "reactjs-popup";
 import { GrFormView } from "react-icons/gr";
 import { FiEdit } from "react-icons/fi";
 import { AiFillDelete } from "react-icons/ai";
-import { NavLink,useHistory } from "react-router-dom";
+import { NavLink, useHistory } from "react-router-dom";
 
 const Vendor = () => {
-  const history = useHistory("")
+  const history = useHistory("");
   const [vendors, setVendor] = useState([]);
   console.log(vendors);
   const [addFormData, setAddFormData] = useState({
@@ -70,7 +70,7 @@ const Vendor = () => {
     } else {
       alert("data added");
       console.log("added data");
-      history.go("/tablevendor")
+      history.go("/tablevendor");
     }
   };
   const getvendoruser = async (e) => {
@@ -94,8 +94,8 @@ const Vendor = () => {
     getvendoruser();
   }, []);
 
-  const vendordelet = async (id) =>{
-    const res2 = await fetch(`http://localhost:5000/getvendordelet/${id}`,{
+  const vendordelet = async (id) => {
+    const res2 = await fetch(`http://localhost:5000/getvendordelet/${id}`, {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
@@ -104,16 +104,15 @@ const Vendor = () => {
     const deletdata = await res2.json();
     console.log(deletdata);
 
-    if (res2.status === 422 || !deletdata){
-      console.log("error")
-      history.go("/tablevendor")
-    }else{
+    if (res2.status === 422 || !deletdata) {
+      console.log("error");
+      history.go("/tablevendor");
+    } else {
       console.log("user deleted");
       getvendoruser(deletdata);
-      history.go("/tablevendor")
-      
+      history.go("/tablevendor");
     }
-  }
+  };
   return (
     <>
       <div className="addbutton">
@@ -271,19 +270,19 @@ const Vendor = () => {
                     </button>
                   </NavLink>
                   <NavLink to={`/getvendoredit/${vendor._id}`}>
-                  <button className="btn btn-primary">
-                    <FiEdit />
+                    <button className="btn btn-primary">
+                      <FiEdit />
                     </button>
-
                   </NavLink>
-                    
-              
-                 <button className="btn btn-danger" onClick={()=>vendordelet(vendor._id)} ><AiFillDelete /></button>
-                 
-                  
-                  
+                  <span>
+                    <button
+                      className="btn btn-danger m-2"
+                      onClick={() => vendordelet(vendor._id)}
+                    >
+                      <AiFillDelete />
+                    </button>
+                  </span>
                 </td>
-               
               </tr>
             ))}
           </tbody>

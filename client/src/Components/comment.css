@@ -5,25 +5,53 @@
 .comments {
   display: flex;
   flex-direction: column;
+  width: 100%;
 }
 
 .comment-content {
   background-color: #1877f2;
   color: aliceblue;
   border-radius: 20px;
-  padding: 15px;
+  padding: 10px;
   margin-left: 3%;
   width: fit-content;
   font-size: 20px;
   margin-top: 15px;
-  
+  max-width: 800px;
+  font-family: "Merriweather", serif;
 }
 
-.user span{
-    margin-bottom: 25px;
-    font-size: 14px;
-    color: blueviolet;
-    
-    font-weight: bold;
-    
+.user span {
+  margin-bottom: 25px;
+  font-size: 14px;
+  color: blueviolet;
+  font-family: "Roboto", sans-serif;
+  font-weight: bold;
+}
+
+.comment-content-left {
+  display: inline-block;
+  color: aliceblue;
+  border-radius: 20px;
+  padding: 10px;
+  margin-right: 3%;
+  width: fit-content;
+  font-size: 20px;
+  margin-top: 15px;
+  max-width: 800px;
+  background-color: #26c24d;
+  font-family: "Merriweather", serif;
+  text-align: end;
+}
+.left-box {
+  direction: rtl;
+  unicode-bidi: bidi-override;
+
+}
+.user-left span {
+  margin-bottom: 25px;
+  font-size: 14px;
+  color: #329d9c;
+  font-family: "Roboto", sans-serif;
+  font-weight: bold;
 }

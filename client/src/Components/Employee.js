@@ -3,10 +3,10 @@ import Popup from "reactjs-popup";
 import { GrFormView } from "react-icons/gr";
 import { FiEdit } from "react-icons/fi";
 import { AiFillDelete } from "react-icons/ai";
-import { NavLink,useHistory } from "react-router-dom";
+import { NavLink, useHistory } from "react-router-dom";
 const Employee = () => {
   const [getEmployeeData, setEmployeeData] = useState([]);
-  const history = useHistory("")
+  const history = useHistory("");
 
   const [inpEmployee, setInpEmployee] = useState({
     Name: " ",
@@ -54,7 +54,7 @@ const Employee = () => {
     } else {
       alert("data added");
       console.log("data aaded");
-      history.go("/tableemployee")
+      history.go("/tableemployee");
     }
   };
 
@@ -71,20 +71,17 @@ const Employee = () => {
     if (res.status === 422 || !data1) {
       alert("error");
       console.log("error");
-   
     } else {
       console.log("data aaded");
       setEmployeeData(data1);
-      
     }
   };
 
   useEffect(() => {
     addgetemployee();
   }, []);
-  const employeedelet = async (id) =>{
-    
-    const res2 = await fetch(`http://localhost:5000/getemployeedelet/${id}`,{
+  const employeedelet = async (id) => {
+    const res2 = await fetch(`http://localhost:5000/getemployeedelet/${id}`, {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
@@ -93,17 +90,15 @@ const Employee = () => {
     const deletdata = await res2.json();
     console.log(deletdata);
 
-    if (res2.status === 422 || !deletdata){
-      console.log("error")
-      history.go("/tableemployee")
-    }else{
+    if (res2.status === 422 || !deletdata) {
+      console.log("error");
+      history.go("/tableemployee");
+    } else {
       console.log("user deleted");
       addgetemployee(deletdata);
-      history.push("/tableemployee")
-      
+      history.push("/tableemployee");
     }
-  }
-
+  };
 
   return (
     <>
@@ -206,8 +201,7 @@ const Employee = () => {
           </thead>
 
           <tbody>
-            {
-                getEmployeeData.map((employee, id) => {
+            {getEmployeeData.map((employee, id) => {
               return (
                 <>
                   <tr className="text-center">
@@ -219,19 +213,23 @@ const Employee = () => {
                     <td>{employee.Address}</td>
                     <td className="d-flex justify-content-between">
                       <NavLink to={`/tableemployeedetails/${employee._id}`}>
-                        <button className="btn btn-success">
+                        <button className="btn btn-success mt-2">
                           <GrFormView />
                         </button>
                       </NavLink>
                       <NavLink to={`/tableemployeeedit/${employee._id}`}>
-                        <button className="btn btn-primary">
+                        <button className="btn btn-primary mt-2">
                           <FiEdit />
                         </button>
                       </NavLink>
-
-                      <button className="btn btn-danger" onClick={()=>employeedelet(employee._id)}>
-                        <AiFillDelete />
-                      </button>
+                      <span>
+                        <button
+                          className="btn btn-danger m-2 "
+                          onClick={() => employeedelet(employee._id)}
+                        >
+                          <AiFillDelete />
+                        </button>
+                      </span>
                     </td>
                   </tr>
                 </>
