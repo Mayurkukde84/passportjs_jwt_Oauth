@@ -11,6 +11,7 @@ import TableCell from "@mui/material/TableCell";
 import { NavLink, useHistory } from "react-router-dom";
 import { AuthContext } from "../Context/AuthContext";
 import Comment from "./Comment";
+import "./comment.css"
 const TableAssetDetails = () => {
   const history = useHistory("");
   const [getAssetID, setAssetID] = useState([]);

@@ -76,9 +76,10 @@ const Comment = () => {
 
   return (
     <div className="container">
-      <h4>Here is {commentData?.ProjectName} Employee Details</h4>
-      <div className="col form-inline p-2 w-50 m-3">
-        <label for="exampleInputEmail1">Comments</label>
+      <div className="col form-inline p-1 w-50 m-2">
+        <label for="exampleInputEmail1">
+          <h3>Comments</h3>
+        </label>
         <textarea
           type="text"
           class="form-control"
@@ -104,31 +105,38 @@ const Comment = () => {
       <button onClick={addComments} className="btn btn-primary ">
         Submit
       </button>
-<ul className="d-flex">
-  <li class="list-group-item">
-  {commentData?.UserComments.map((user) => {
-        return (
-          <div>
-            <p>{user} : </p>
+      <div className="comment-user">
+        <div className="user">
+          {/* {commentData?.UserComments.map((user) => {
+            return (
+              <div class="user-box">
+                <p>{user} : </p>
+              </div>
+            );
+          })}
+        </div>
+        <div className="comment">
+          {commentData?.Comments.map((comment) => {
+            return (
+              <div className="comment-box">
+                <p>{comment}</p>
+              </div>
+            );
+          })} */}
+
+          <div className="comments">
+            {commentData?.Comments.map((comment, index) => {
+              return (
+                <>
+                <div className="comment-content">{comment}</div>
+                 <div className="user"><span>{commentData.UserComments[index]}</span></div> 
+                  
+                </>
+              );
+            })}
           </div>
-        );
-      })}
-
-  </li>
-  <li class="list-group-item">
-  {commentData?.Comments.map((comment) => {
-        return (
-          <div>
-            <p>{comment}</p>
-          </div>
-        );
-      })}
-
-  </li>
-</ul>
-     
-
-      
+        </div>
+      </div>
     </div>
   );
 };

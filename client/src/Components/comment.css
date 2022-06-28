@@ -1,5 +1,29 @@
-.btn{
-    margin-left: 45%;
+.btn {
+  margin-left: 45%;
+}
+
+.comments {
+  display: flex;
+  flex-direction: column;
+}
+
+.comment-content {
+  background-color: #1877f2;
+  color: aliceblue;
+  border-radius: 20px;
+  padding: 15px;
+  margin-left: 3%;
+  width: fit-content;
+  font-size: 20px;
+  margin-top: 15px;
+  
+}
+
+.user span{
+    margin-bottom: 25px;
+    font-size: 14px;
+    color: blueviolet;
     
+    font-weight: bold;
     
 }
