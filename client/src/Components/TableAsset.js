@@ -119,7 +119,7 @@ const TableAsset = () => {
   return (
     <>
       <div className="addbutton">
-        <Popup trigger={<button>+ADD</button>} position="bottom right">
+        <Popup trigger={<button style={{"color":"white","background":"#5E4DAB"}}>+ADD</button>} position="bottom right">
           {(close) => (
             <div className="container">
               <form

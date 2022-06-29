@@ -75,7 +75,7 @@ const EmployeeDetails = () => {
   return (
     <>
     <div className="center mt-3">
-    <h4>Here is {getEmployee.Name} Employee  Details</h4>
+    <h4 className="mt-2" style={{"color":"#6E5DCF","font-family": "Poppins"}}>Here is <span className="text-uppercase" style={{"color":"#c27DFC","font-family": "Roboto"}}>{getEmployee.Name}</span> Employee  Details</h4>
 
     </div>
 

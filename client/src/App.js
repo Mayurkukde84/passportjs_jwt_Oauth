@@ -26,23 +26,17 @@ import AssignEdit from './Components/AssignEdit';
 
 
 
+
 function App() {
+ return (
+
+<Router>
+<Navbar/>
+
+      <Route exact path="/" component={Home}/>
  
 
-  
-
-  return (
-
-
-    
-    <Router>
-
-   
-
-
-   
-      <Navbar/>
-      <Route exact path="/" component={Home}/>
+     
       <UnPrivateRoute  path="/login" component={Login}/>
       <UnPrivateRoute path="/register" component={Register}/>
       <PrivateRoute path="/useroptions" roles={["user","admin"]} component={UserOptions}/>
@@ -66,7 +60,9 @@ function App() {
       <PrivateRoute path="/tableemployeeedit/:id" roles={["user","admin"]} component={EmployeeEdit}/>
       
       <PrivateRoute path="/admin" roles={["admin"]} component={Admin}/>
-      
+
+  
+ 
     </Router>
     
   );

@@ -15,7 +15,7 @@
   padding: 10px;
   margin-left: 3%;
   width: fit-content;
-  font-size: 20px;
+  font-size: 16px;
   margin-top: 15px;
   max-width: 800px;
   font-family: "Merriweather", serif;
@@ -36,7 +36,7 @@
   padding: 10px;
   margin-right: 3%;
   width: fit-content;
-  font-size: 20px;
+  font-size: 16px;
   margin-top: 15px;
   max-width: 800px;
   background-color: #26c24d;
@@ -54,4 +54,15 @@
   color: #329d9c;
   font-family: "Roboto", sans-serif;
   font-weight: bold;
+}
+.comment-box-center{
+ margin-top: 3%;
+  align-items: center;
+  justify-content: center;
+  margin-left: 10%;
+  margin-bottom: 2%;
+  
+
+
+
 }

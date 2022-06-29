@@ -82,7 +82,7 @@ export default function VendorDetails() {
   return (
     <>
     <div className="center mt-3">
-    <h4> Here is {getvendor.VendorName} Vendor  Details</h4>
+    <h4 className="mt-2" style={{"color":"#6E5DCF ","font-family": "Poppins"}}> Here is <span className="text-uppercase" style={{"color":"#c27DFC","font-family": "Roboto"}}>{getvendor.VendorName}</span> Vendor  Details</h4>
 
     </div>
     <div className="center p-5 mt-3">

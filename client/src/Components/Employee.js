@@ -103,7 +103,7 @@ const Employee = () => {
   return (
     <>
       <div className="addbutton">
-        <Popup trigger={<button>+ADD</button>} position="bottom center">
+        <Popup trigger={<button style={{"color":"white","background":"#5E4DAB"}}>+ADD</button>} position="bottom center">
           {(close) => (
             <div className="container">
               <form className="bg-light p-2 ">

@@ -116,7 +116,7 @@ const Vendor = () => {
   return (
     <>
       <div className="addbutton">
-        <Popup trigger={<button>+ADD</button>} position="bottom center">
+        <Popup trigger={<button style={{"color":"white","background":"#5E4DAB"}}>+ADD</button>} position="bottom center">
           {(close) => (
             <div className="container">
               <form className="bg-light p-2 ">
@@ -265,18 +265,18 @@ const Vendor = () => {
                 <td>{vendor.Address}</td>
                 <td className="d-flex justify-content-between">
                   <NavLink to={`/getvendor/${vendor._id}`}>
-                    <button className="btn btn-success">
+                    <button className="btn btn-success m-1">
                       <GrFormView />
                     </button>
                   </NavLink>
                   <NavLink to={`/getvendoredit/${vendor._id}`}>
-                    <button className="btn btn-primary">
+                    <button className="btn btn-primary m-1">
                       <FiEdit />
                     </button>
                   </NavLink>
                   <span>
                     <button
-                      className="btn btn-danger m-2"
+                      className="btn btn-danger m-1"
                       onClick={() => vendordelet(vendor._id)}
                     >
                       <AiFillDelete />

@@ -75,36 +75,33 @@ const Comment = () => {
   }
 
   return (
-    <div className="container">
-      <div className="col form-inline p-1 w-50 m-2">
-        <label for="exampleInputEmail1">
-          <h3>Comments</h3>
-        </label>
-        <textarea
-          type="text"
-          class="form-control"
-          required="required"
-          name="Comments"
-          placeholder="Enter a Comment"
-          value={inpComments.Comments}
-          onChange={setComment}
-        />
-      </div>
-      <div className="col form-inline  w-50 m-3">
-        <input
-          type="hidden"
-          class="form-control"
-          required="required"
-          name="UserComments"
-          placeholder=""
-          value={inpComments.UserName}
-          onChange={setComment}
-        />
-      </div>
+    <div className="container border border-secondary mb-4">
+     <h3 className="mt-3 ml-4">Comment:</h3>
+      <div className="comment-box-center">
+     
+        <div className="col form-inline p-1 w-50 m-3 center">
+          <label for="exampleInputEmail1">
+       
+         
+          </label>
+          <textarea type="text" class="form-control" required="required" name="Comments" placeholder="Enter your Comments" value={inpComments.Comments} onChange={setComment}/>
+        </div>
+        <div className="col form-inline  w-50 m-1">
+          <input
+            type="hidden"
+            class="form-control"
+            required="required"
+            name="UserComments"
+            placeholder=""
+            value={inpComments.UserName}
+            onChange={setComment}
+          />
+        </div>
 
-      <button onClick={addComments} className="btn btn-primary ">
-        Submit
-      </button>
+        <button onClick={addComments} className="btn btn-primary ">
+          Submit
+        </button>
+      </div>
       {/* <div className="comment-user">
         <div className="user"> */}
       {/* {commentData?.UserComments.map((user) => {
@@ -126,11 +123,13 @@ const Comment = () => {
 
       <div className="comments">
         {commentData?.Comments.map((comment, index) => {
+          console.log(commentData.UserComments[index]);
           if (user2 == commentData.UserComments[index]) {
-            console.log(index)
             return (
               <div className="left-box">
-                <div className="comment-content-left"><span>{comment}</span></div>
+                <div className="comment-content-left">
+                  <span>{comment}</span>
+                </div>
 
                 <div className="user-left">
                   <span>{commentData.UserComments[index]}</span>

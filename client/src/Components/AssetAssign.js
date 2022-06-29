@@ -111,10 +111,10 @@ const AssetAssign = () => {
   return (
     <>
       <div className="center mt-3">
-        <h4>Assign Task To Members</h4>
+        <h4 className="mt-2" style={{"color":"#c27DFC","font-family": "Poppins"}}>Assign Task To Members</h4>
       </div>
       <div className="addbutton">
-        <Popup trigger={<button>+ADD</button>} position="bottom center">
+        <Popup trigger={<button style={{"color":"white","background":"#5E4DAB"}}>+ADD</button>} position="bottom center">
           <div className="container">
             <form className="bg-light p-2 ">
               <div className="row p-2 ">
@@ -201,7 +201,7 @@ const AssetAssign = () => {
             {getAssignData.map((assign, id) => {
               return (
                 <>
-                  <tr className="text-center">
+                  <tr className="text-center ">
                     <th>{id + 1}</th>
                     <td>{assign.UserName}</td>
                     <td>{assign.Member}</td>
@@ -209,20 +209,20 @@ const AssetAssign = () => {
                     <td>{assign.Descripation}</td>
                     <td className="d-flex justify-content-between">
                       <NavLink to={`tableassigndetails/${assign._id}`}>
-                        <button className="btn btn-success">
+                        <button className="btn btn-success mt-1">
                           <GrFormView />
                         </button>
                       </NavLink>
 
                       <NavLink to={`/tableassignedit/${assign._id}`}>
-                        <button className="btn btn-primary">
+                        <button className="btn btn-primary mt-1">
                           <FiEdit />
                         </button>
                       </NavLink>
 
                       <span>
                         <button
-                          className="btn btn-danger m-2"
+                          className="btn btn-danger m-1 "
                           onClick={() => assigndelet(assign._id)}
                         >
                           <AiFillDelete />
