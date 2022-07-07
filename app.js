@@ -68,6 +68,9 @@ app.use(employeeRouter)
 const assignRouter = require("./routes/Assign")
 app.use(assignRouter)
 
+const projectRouter = require("./routes/Project")
+app.use(projectRouter)
+
 app.listen(5000, () => {
   console.log("express server started");
 });

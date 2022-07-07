@@ -103,10 +103,10 @@ const Employee = () => {
   return (
     <>
       <div className="addbutton">
-        <Popup trigger={<button style={{"color":"white","background":"#5E4DAB"}}>+ADD</button>} position="bottom center">
+        <Popup  trigger={<button style={{"color":"white","background":"#5E4DAB"}}>+ADD</button>} position="bottom center">
           {(close) => (
             <div className="container">
-              <form className="bg-light p-2 ">
+              <form className="bg-light p-2 border border-warning">
                 <div className="row p-2 ">
                   <div className="col form-inline p-2">
                     <label for="exampleInputEmail1"> Name</label>
@@ -194,7 +194,7 @@ const Employee = () => {
               <th scope="col">Name</th>
               <th scope="col">EmployeeID</th>
               <th scope="col">Department</th>
-              <th scope="col">Phase Number</th>
+              <th scope="col">Phone Number</th>
               <th scope="col">Address</th>
               <th scope="col">Action</th>
             </tr>
@@ -213,18 +213,18 @@ const Employee = () => {
                     <td>{employee.Address}</td>
                     <td className="d-flex justify-content-between">
                       <NavLink to={`/tableemployeedetails/${employee._id}`}>
-                        <button className="btn btn-success mt-2">
+                        <button className="btn btn-white border border-dark mt-2">
                           <GrFormView />
                         </button>
                       </NavLink>
                       <NavLink to={`/tableemployeeedit/${employee._id}`}>
-                        <button className="btn btn-primary mt-2">
+                        <button className="btn btn-white border btn btn-primary mt-2">
                           <FiEdit />
                         </button>
                       </NavLink>
                       <span>
                         <button
-                          className="btn btn-danger m-2 "
+                          className="btn btn-white border btn btn-danger m-2 "
                           onClick={() => employeedelet(employee._id)}
                         >
                           <AiFillDelete />

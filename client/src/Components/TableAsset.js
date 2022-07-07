@@ -10,6 +10,8 @@ import axios from "axios";
 
 const TableAsset = () => {
   const history = useHistory("");
+  const [getVendor, setVendor] = useState([]);
+  const [getCostCode, setCostCode] = useState([]);
   const [getAssetData, setAssetData] = useState([]);
 
   // model.id = nanoid()
@@ -99,6 +101,25 @@ const TableAsset = () => {
     addgetasset();
   }, []);
 
+  useEffect(() => {
+    const vendor = async () => {
+      const res = await fetch("http://localhost:5000/getvendor");
+      const getres = await res.json();
+
+      setVendor(await getres);
+    };
+    vendor();
+  }, []);
+  useEffect(() => {
+    const costcode = async () => {
+      const res = await fetch("http://localhost:5000/getproject");
+      const getres1 = await res.json();
+
+      setCostCode(await getres1);
+    };
+    costcode();
+  }, []);
+
   const assetdelet = async (id) => {
     const res2 = await fetch(`http://localhost:5000/getassetdelet/${id}`, {
       method: "DELETE",
@@ -119,11 +140,18 @@ const TableAsset = () => {
   return (
     <>
       <div className="addbutton">
-        <Popup trigger={<button style={{"color":"white","background":"#5E4DAB"}}>+ADD</button>} position="bottom right">
+        <Popup
+          trigger={
+            <button style={{ color: "white", background: "#5E4DAB" }}>
+              +ADD
+            </button>
+          }
+          position="bottom right"
+        >
           {(close) => (
             <div className="container">
               <form
-                className="bg-light p-2 "
+                className="bg-light p-2 border border-warning"
                 onSubmit={addinpasset}
                 enctype="multipart/form-data"
               >
@@ -178,7 +206,7 @@ const TableAsset = () => {
                   <div className="col form-inline">
                     <label for="exampleInputEmail1">Date Of Purchase</label>
                     <input
-                      type="text"
+                      type="date"
                       class="form-control"
                       required="required"
                       name="DateOfPurchase"
@@ -190,7 +218,7 @@ const TableAsset = () => {
 
                   <div className="col form-inline">
                     <label for="exampleInputEmail1">Mode</label>
-                    <input
+                    <select
                       type="text"
                       class="form-control"
                       required="required"
@@ -198,21 +226,31 @@ const TableAsset = () => {
                       placeholder="Enter a GST number"
                       onChange={setAsset}
                       value={inpAsset.Mode}
-                    />
+                    >
+                      <option>---select Mode---</option>
+                      <option>Online</option>
+                      <option>Offline</option>
+                    </select>
                   </div>
                 </div>
                 <div className="row">
                   <div className="col form-inline ">
                     <label for="exampleInputEmail1">Vendor</label>
-                    <input
-                      type="text"
-                      class="form-control"
-                      required="required"
+                    <select
+                      className="form-control p-2"
                       name="Vendor"
-                      placeholder="Enter a phone number"
                       onChange={setAsset}
                       value={inpAsset.Vendor}
-                    />
+                    >
+                      <option> ---select Mode---</option>
+                      {getVendor.map((vendors, index) => {
+                        return (
+                          <option key={index} name="Vendor">
+                            {vendors.VendorName}
+                          </option>
+                        );
+                      })}
+                    </select>
                   </div>
                   <div className="col form-inline">
                     <label for="exampleInputEmail1">Receipt</label>
@@ -241,42 +279,69 @@ const TableAsset = () => {
                     />
                   </div>
                   <div className="col form-inline">
-                    <label for="exampleInputEmail1">Cost Code</label>
-                    <input
-                      type="text"
-                      class="form-control"
-                      required="required"
-                      name="CostCode"
-                      placeholder="Enter a GST number"
-                      onChange={setAsset}
-                      value={inpAsset.CostCode}
-                    />
+                    <div className="col form-inline ">
+                      <label for="exampleInputEmail1">CostCode</label>
+                      <select
+                        className="form-control p-2"
+                        name="CostCode"
+                        onChange={setAsset}
+                        value={inpAsset.CostCode}
+                      >
+                        <option > ---select Mode---</option>
+
+                        {getCostCode.map((code, index) => {
+                          return (
+                            <>
+                              <option  key={index} name="CostCode">
+                                {code.CostCode}
+                              </option>
+                              
+                            </>
+                          );
+                        })}
+                       
+                      </select>
+                    </div>
                   </div>
                 </div>
                 <div className="row">
                   <div className="col form-inline ">
-                    <label for="exampleInputEmail1">Projet Name</label>
-                    <input
-                      type="text"
-                      class="form-control"
-                      required="required"
+                    <label for="exampleInputEmail1">ProjectName</label>
+                    <select
+                      className="form-control p-2"
                       name="ProjectName"
-                      placeholder="Enter a phone number"
                       onChange={setAsset}
                       value={inpAsset.ProjectName}
-                    />
+                    >
+                      <option> ---select Mode---</option>
+                      {getCostCode.map((code, index) => {
+                        return (
+                          <option key={index} name="CostCode">
+                            {code.ProjectName}
+                          </option>
+                        );
+                      })}
+                     
+                    </select>
                   </div>
-                  <div className="col form-inline">
-                    <label for="exampleInputEmail1">Owned By</label>
-                    <input
-                      type="text"
-                      class="form-control"
-                      required="required"
+                 
+                  <div className="col form-inline ">
+                    <label for="exampleInputEmail1">OwnedBy</label>
+                    <select
+                      className="form-control p-2"
                       name="OwnedBy"
-                      placeholder="Enter a GST number"
                       onChange={setAsset}
                       value={inpAsset.OwnedBy}
-                    />
+                    >
+                      <option> ---select Mode---</option>
+                      {getCostCode.map((code, index) => {
+                        return (
+                          <option key={index} name="OwnedBy">
+                            {code.Owner}
+                          </option>
+                        );
+                      })}
+                    </select>
                   </div>
                 </div>
                 <div className="row">
@@ -379,24 +444,23 @@ const TableAsset = () => {
                     <td>
                       <div className="d-flex justify-content-between">
                         <NavLink to={`/tableassetdetails/${element._id}`}>
-                          <button className="btn btn-success">
+                          <button className="border border-dark btn btn-white">
                             <GrFormView />
                           </button>
                         </NavLink>
 
                         <NavLink to={`/tableassetedit/${element._id}`}>
-                          <button className="btn btn-primary">
+                          <button className="border border-dark btn btn-primary">
                             <FiEdit />
                           </button>
                         </NavLink>
                         <span>
-                        <button
-                          className="btn btn-danger"
-                          onClick={() => assetdelet(element._id)}
-                          
-                        >
-                          <AiFillDelete />
-                        </button>
+                          <button
+                            className="border border-dark btn btn-danger"
+                            onClick={() => assetdelet(element._id)}
+                          >
+                            <AiFillDelete />
+                          </button>
                         </span>
                       </div>
                     </td>

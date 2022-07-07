@@ -1,7 +1,7 @@
 const router = require("express").Router();
 const passport = require("passport")
 
-const CLIENT_URL = "http://localhost:3000/table"
+const CLIENT_URL = "http://localhost:3000/useroptions"
 
 
 
@@ -11,6 +11,7 @@ router.get("login/success", (req,res) =>{
             success:true,
             message:"successfull",
             user:req.user,
+           
         })
     }
     })

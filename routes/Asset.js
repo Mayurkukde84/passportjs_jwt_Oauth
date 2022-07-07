@@ -50,7 +50,6 @@ assetRouter
 
     const OwnershipDocument = req.file.filename;
     const DateOfPurchase = req.body.DateOfPurchase;
-    
 
     const newUserData = {
       ID,
@@ -67,7 +66,6 @@ assetRouter
       OwnedBy,
       OwnershipDocument,
       DateOfPurchase,
-      
     };
 
     const newUser = new asset(newUserData);
@@ -128,14 +126,13 @@ assetRouter.post("/tableasset/:id/comment", async (req, res) => {
   const { id } = req.params;
   const Comments = req.body.Comments;
   const UserComments = req.body.UserComments;
-  
+
   console.log(Comments);
 
   const post = await asset.findById(id);
 
   post.Comments.push(Comments);
   post.UserComments.push(UserComments);
-  
 
   const updatepost = await asset.findByIdAndUpdate(id, post, { new: true });
 

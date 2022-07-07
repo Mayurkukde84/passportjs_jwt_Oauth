@@ -9,7 +9,7 @@ import Register from './Components/Register';
 import Admin  from './Components/Admin';
 import PrivateRoute from './hocs/PrivateRoute';
 import UnPrivateRoute from './hocs/UnPrivateRoute';
-import {BrowserRouter as Router, Route,Link} from 'react-router-dom';
+import {BrowserRouter as Router, Route} from 'react-router-dom';
 
 import Vendor from './Components/Vendor';
 import VendorDetails from './Components/VendorDetails';
@@ -23,7 +23,9 @@ import AssetAssign from './Components/AssetAssign';
 import AssignDetails from './Components/AssignDetails';
 import Comment from './Components/Comment';
 import AssignEdit from './Components/AssignEdit';
-
+import Project from "./Components/Project";
+import ProjectDetails from './Components/ProjectDetails';
+import ProjectEdite from './Components/ProjectEdite';
 
 
 
@@ -58,8 +60,13 @@ function App() {
       <PrivateRoute path="/tableemployee" roles={["user","admin"]} component={Employee}/>
       <PrivateRoute path="/tableemployeedetails/:id" roles={["user","admin"]} component={EmployeeDetails}/>
       <PrivateRoute path="/tableemployeeedit/:id" roles={["user","admin"]} component={EmployeeEdit}/>
+
+      <PrivateRoute path="/tableproject" roles={["user","admin"]} component={Project} />
+      <PrivateRoute path="/tableprojectdetails/:id" roles={["user","admin"]} component={ProjectDetails}/>
+      <PrivateRoute path="/tableprojecteedit/:id" roles={["user","admin"]} component={ProjectEdite}/>
       
       <PrivateRoute path="/admin" roles={["admin"]} component={Admin}/>
+
 
   
  

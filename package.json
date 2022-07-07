@@ -4,8 +4,9 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "nodemon app.js"
+   
+    "dev": "nodemon app.js",
+    "start": "./node_modules/.bin/concurrently \"npm run dev\" \"npm run start\""
   },
   "keywords": [],
   "author": "",

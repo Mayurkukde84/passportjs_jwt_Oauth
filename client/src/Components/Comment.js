@@ -14,9 +14,7 @@ const Comment = () => {
     UserComments: user2,
   });
 
-  useEffect(() => {
-    fetchCommentData();
-  }, []);
+  
 
   function setComment(e) {
     const { name, value } = e.target;
@@ -73,6 +71,9 @@ const Comment = () => {
       .then(setCommentData)
       .catch((err) => console.log(err.message));
   }
+  useEffect(() => {
+    fetchCommentData();
+  }, []);
 
   return (
     <div className="container border border-secondary mb-4">
@@ -124,7 +125,7 @@ const Comment = () => {
       <div className="comments">
         {commentData?.Comments.map((comment, index) => {
           console.log(commentData.UserComments[index]);
-          if (user2 == commentData.UserComments[index]) {
+          if (user2 === commentData.UserComments[index]) {
             return (
               <div className="left-box">
                 <div className="comment-content-left">

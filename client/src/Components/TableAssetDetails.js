@@ -15,10 +15,10 @@ import "./comment.css"
 const TableAssetDetails = () => {
   const history = useHistory("");
   const [getAssetID, setAssetID] = useState([]);
-  const [getCommentID, setCommentID] = useState([]);
+ 
   const { id } = useParams(" ");
   const { user } = useContext(AuthContext);
-  const user2 = user.username;
+  
   // console.log(getAssetID._id);
   const addgetassetid = async () => {
     const res = await fetch(`http://localhost:5000/getasset/${id}`, {

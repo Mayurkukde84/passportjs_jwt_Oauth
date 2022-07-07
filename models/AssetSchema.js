@@ -65,9 +65,11 @@ const assetSchema = new mongoose.Schema({
    
     Comments: { type: [String], default: [] },
     UserComments: { type: [String], default: [] },
-    
+ 
     
 
+},   {
+    timestamps: true
 });
 
 const asset = new mongoose.model("asset",assetSchema);

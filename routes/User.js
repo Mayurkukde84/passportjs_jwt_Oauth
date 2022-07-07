@@ -1,4 +1,5 @@
 const express = require('express');
+const router = require("express").Router();
 const userRouter = express.Router();
 const passport = require('passport');
 const passportConfig = require('../passport');
@@ -15,7 +16,8 @@ const signToken = userID =>{
 }
 
 userRouter.post('/register',(req,res)=>{
-    const { username,password,role } = req.body;
+    const { username,password,role} = req.body;
+    console.log(req.body)
     User.findOne({username},(err,user)=>{
         if(err)
             res.status(500).json({message : {msgBody : "Error has occured", msgError: true}});

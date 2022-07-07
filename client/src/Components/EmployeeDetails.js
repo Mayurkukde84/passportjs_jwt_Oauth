@@ -133,7 +133,7 @@ const EmployeeDetails = () => {
           </NavLink>
 
           <Button size="small" class="btn btn-danger p-2 m-2" onClick={() => employeedelet(getEmployee._id)}>
-            Delete
+            Deletez
           </Button>
         </CardActions>
       </Card>

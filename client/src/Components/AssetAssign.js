@@ -82,7 +82,7 @@ const AssetAssign = () => {
 
   useEffect(() => {
     const member = async () => {
-      const res = await fetch("http://localhost:5000/getmember");
+      const res = await fetch("http://localhost:5000/getemployee");
       const getres = await res.json();
 
       setMember(await getres);
@@ -111,12 +111,24 @@ const AssetAssign = () => {
   return (
     <>
       <div className="center mt-3">
-        <h4 className="mt-2" style={{"color":"#c27DFC","font-family": "Poppins"}}>Assign Task To Members</h4>
+        <h4
+          className="mt-2"
+          style={{ color: "#c27DFC", "font-family": "Poppins" }}
+        >
+          Assign Task To Members
+        </h4>
       </div>
       <div className="addbutton">
-        <Popup trigger={<button style={{"color":"white","background":"#5E4DAB"}}>+ADD</button>} position="bottom center">
+        <Popup
+          trigger={
+            <button style={{ color: "white", background: "#5E4DAB" }}>
+              +ADD
+            </button>
+          }
+          position="bottom center"
+        >
           <div className="container">
-            <form className="bg-light p-2 ">
+            <form className="bg-light p-2 border border-warning">
               <div className="row p-2 ">
                 <div className="col form-inline p-2">
                   <label for="exampleInputEmail1">Member</label>
@@ -131,7 +143,7 @@ const AssetAssign = () => {
                     {getMember.map((m, index) => {
                       return (
                         <option key={index} name="Member">
-                          {m.Member}
+                          {m.Name}
                         </option>
                       );
                     })}
@@ -148,7 +160,7 @@ const AssetAssign = () => {
                   />
                 </div>
                 <div className="col form-inline p-2">
-                  <label for="exampleInputEmail1">Assign</label>
+                  <label for="exampleInputEmail1">Topic</label>
                   <input
                     type="text"
                     class="form-control"
@@ -192,7 +204,7 @@ const AssetAssign = () => {
               <th scope="col">ID</th>
               <th scope="col">Name</th>
               <th scope="col">Member</th>
-              <th scope="col">Assign</th>
+              <th scope="col">Topic</th>
               <th scope="col">Descripation</th>
               <th scope="col">Action</th>
             </tr>
@@ -201,7 +213,7 @@ const AssetAssign = () => {
             {getAssignData.map((assign, id) => {
               return (
                 <>
-                  <tr className="text-center ">
+                  <tr className="text-center " >
                     <th>{id + 1}</th>
                     <td>{assign.UserName}</td>
                     <td>{assign.Member}</td>
@@ -209,20 +221,20 @@ const AssetAssign = () => {
                     <td>{assign.Descripation}</td>
                     <td className="d-flex justify-content-between">
                       <NavLink to={`tableassigndetails/${assign._id}`}>
-                        <button className="btn btn-success mt-1">
+                        <button className="border border-dark btn btn-white mt-1">
                           <GrFormView />
                         </button>
                       </NavLink>
 
                       <NavLink to={`/tableassignedit/${assign._id}`}>
-                        <button className="btn btn-primary mt-1">
+                        <button className="border border-dark btn btn-primary mt-1">
                           <FiEdit />
                         </button>
                       </NavLink>
 
                       <span>
                         <button
-                          className="btn btn-danger m-1 "
+                          className="border border-dark btn btn-danger m-1 "
                           onClick={() => assigndelet(assign._id)}
                         >
                           <AiFillDelete />
