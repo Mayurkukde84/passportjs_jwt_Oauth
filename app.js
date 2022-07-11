@@ -1,11 +1,13 @@
 const express = require('express');
 const app = express();
+const cors = require("cors")
+app.use(cors({}))
 const cookieParser = require('cookie-parser');
 const mongoose = require('mongoose');
 
 const passport = require("passport");
 const authRoute = require("./routes/auth")
-const cors = require("cors")
+
 require("./passport")
 const cookieSession = require("cookie-session")
 const vendor = require("./models/Vendor")
@@ -14,7 +16,7 @@ const employee = require("./models/EmployeeSchema")
 const assign = require("./models/AssetSchema")
 const bodyParser = require("body-parser");
 const path = require('path')
-app.use('passportjs_jwt_Oauth/images', express.static("/passportjs_jwt_Oauth/images"));
+app.use('/images', express.static(path.join("images")));
 // app.use('/images',express.static(path.join(__dirname, '/passportjs_jwt_Oauth/images/')));
 app.use(
   bodyParser.urlencoded({
@@ -43,7 +45,7 @@ app.use(cookieSession(
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(express.json())
-app.use(cors({}))
+
   // origin:"http://localhost:3000",
   // methods:"GET,POST,PUT,DELETE",
   // credentials:true,

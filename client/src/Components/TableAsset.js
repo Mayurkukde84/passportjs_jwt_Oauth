@@ -16,7 +16,10 @@ pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/$
 }/pdf.worker.js`;
 const TableAsset = () => {
 
-
+  const openInNewTab = url => {
+    window.open(url, '_blank', 'noopener,noreferrer');
+  };  
+  
   const history = useHistory("");
   const [getVendor, setVendor] = useState([]);
   const [getCostCode, setCostCode] = useState([]);
@@ -452,10 +455,11 @@ const TableAsset = () => {
                     <td>{element.CostCode}</td>
                     <td>{element.ProjectName}</td>
                     <td>{element.OwnedBy}</td>
-                    <td><Document file={`${mediaUrl}/${element.OwnershipDocument}`}>
+                    {/* <td><Document file={`${mediaUrl}/${element.OwnershipDocument}`}>
                     <Page pageNumber={pageNumber} />
 
-                    </Document></td> 
+                    </Document></td>  */}
+                    <td><button onClick={() => openInNewTab(`${mediaUrl}/${element.OwnershipDocument}`)}>OwnershipDocument View</button></td>
                     {/* <td><Document file={sample}>
                     <Page pageNumber={pageNumber} />
 
