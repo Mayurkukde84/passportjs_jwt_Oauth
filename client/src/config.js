@@ -1,0 +1,1 @@
+export const mediaUrl ='http://localhost:5000/passportjs_jwt_Oauth/images';

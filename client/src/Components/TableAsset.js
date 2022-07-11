@@ -5,10 +5,18 @@ import { FiEdit } from "react-icons/fi";
 import { AiFillDelete } from "react-icons/ai";
 import { NavLink, useHistory } from "react-router-dom";
 import { nanoid } from "nanoid";
-import { model } from "mongoose";
+import sample from "../images/2b632f3f-477e-4b43-b782-da94d8e46d4d-1657187715035.pdf"
 import axios from "axios";
+import { pdfjs } from "react-pdf";
+import { Document, Page } from "react-pdf";
 
+import { mediaUrl } from "../config";
+pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${
+  pdfjs.version
+}/pdf.worker.js`;
 const TableAsset = () => {
+
+
   const history = useHistory("");
   const [getVendor, setVendor] = useState([]);
   const [getCostCode, setCostCode] = useState([]);
@@ -86,6 +94,7 @@ const TableAsset = () => {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
+        type: "application/pdf",
       },
     });
     const data1 = await res.json();
@@ -112,7 +121,7 @@ const TableAsset = () => {
   }, []);
   useEffect(() => {
     const costcode = async () => {
-      const res = await fetch("http://localhost:5000/getproject");
+      const res = await fetch(`http://localhost:5000/getproject`);
       const getres1 = await res.json();
 
       setCostCode(await getres1);
@@ -136,6 +145,14 @@ const TableAsset = () => {
       history.go("/tableasset");
     }
   };
+
+  const [numPages, setNumPages] = useState(null);
+  const [pageNumber, setPageNumber] = useState(1);
+
+  function onDocumentLoadSuccess({ numPages }) {
+    setNumPages(numPages);
+  }
+  pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
 
   return (
     <>
@@ -287,19 +304,17 @@ const TableAsset = () => {
                         onChange={setAsset}
                         value={inpAsset.CostCode}
                       >
-                        <option > ---select Mode---</option>
+                        <option> ---select---</option>
 
                         {getCostCode.map((code, index) => {
                           return (
                             <>
-                              <option  key={index} name="CostCode">
+                              <option key={index} name="CostCode">
                                 {code.CostCode}
                               </option>
-                              
                             </>
                           );
                         })}
-                       
                       </select>
                     </div>
                   </div>
@@ -313,7 +328,7 @@ const TableAsset = () => {
                       onChange={setAsset}
                       value={inpAsset.ProjectName}
                     >
-                      <option> ---select Mode---</option>
+                      <option> ---select---</option>
                       {getCostCode.map((code, index) => {
                         return (
                           <option key={index} name="CostCode">
@@ -321,10 +336,9 @@ const TableAsset = () => {
                           </option>
                         );
                       })}
-                     
                     </select>
                   </div>
-                 
+
                   <div className="col form-inline ">
                     <label for="exampleInputEmail1">OwnedBy</label>
                     <select
@@ -350,7 +364,7 @@ const TableAsset = () => {
                     <input
                       type="file"
                       name="OwnershipDocument"
-                      accept="image/*,.pdf"
+                      accept="application/pdf"
                       onChange={handlePhoto}
                     />
                   </div>
@@ -438,7 +452,17 @@ const TableAsset = () => {
                     <td>{element.CostCode}</td>
                     <td>{element.ProjectName}</td>
                     <td>{element.OwnedBy}</td>
-                    <td>{element.OwnershipDocument}</td>
+                    <td><Document file={`${mediaUrl}/${element.OwnershipDocument}`}>
+                    <Page pageNumber={pageNumber} />
+
+                    </Document></td> 
+                    {/* <td><Document file={sample}>
+                    <Page pageNumber={pageNumber} />
+
+                    </Document>
+
+                    </td> */}
+
                     <td>{element.DateOfPurchase}</td>
 
                     <td>

@@ -13,6 +13,9 @@ const asset = require("./models/AssetSchema")
 const employee = require("./models/EmployeeSchema")
 const assign = require("./models/AssetSchema")
 const bodyParser = require("body-parser");
+const path = require('path')
+app.use('passportjs_jwt_Oauth/images', express.static("/passportjs_jwt_Oauth/images"));
+// app.use('/images',express.static(path.join(__dirname, '/passportjs_jwt_Oauth/images/')));
 app.use(
   bodyParser.urlencoded({
     extended: true,
@@ -45,7 +48,7 @@ app.use(cors({}))
   // methods:"GET,POST,PUT,DELETE",
   // credentials:true,
 
-
+// app.use('/images',express.static('./images/'));
 app.use ("/auth",authRoute)
 
 

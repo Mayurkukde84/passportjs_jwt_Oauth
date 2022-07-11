@@ -12,6 +12,8 @@ import { NavLink, useHistory } from "react-router-dom";
 import { AuthContext } from "../Context/AuthContext";
 import Comment from "./Comment";
 import "./comment.css"
+
+import { mediaUrl } from "../config";
 const TableAssetDetails = () => {
   const history = useHistory("");
   const [getAssetID, setAssetID] = useState([]);
@@ -188,6 +190,7 @@ const TableAssetDetails = () => {
                 </TableCell>
                 <TableCell align="right">
                   <h5> {getAssetID.OwnershipDocument}</h5>
+                  <h5> <img height="50px" src={`${mediaUrl}/${getAssetID.OwnershipDocument}`} /></h5>
                 </TableCell>
               </TableCol>
               <TableCol>
