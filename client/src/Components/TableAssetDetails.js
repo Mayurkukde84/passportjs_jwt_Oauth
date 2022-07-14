@@ -12,9 +12,16 @@ import { NavLink, useHistory } from "react-router-dom";
 import { AuthContext } from "../Context/AuthContext";
 import Comment from "./Comment";
 import "./comment.css"
+import { pdfjs } from "react-pdf";
+import {mediaUrl} from "../config"
+pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${
+  pdfjs.version
+}/pdf.worker.js`;
 
-import { mediaUrl } from "../config";
 const TableAssetDetails = () => {
+   const openInNewTab = url => {
+    window.open(url, '_blank', 'noopener,noreferrer');
+  };  
   const history = useHistory("");
   const [getAssetID, setAssetID] = useState([]);
  
@@ -189,8 +196,8 @@ const TableAssetDetails = () => {
                   <h5>Owner Ship Document:</h5>
                 </TableCell>
                 <TableCell align="right">
-                  <h5> {getAssetID.OwnershipDocument}</h5>
-                  <h5> <img height="50px" src={`${mediaUrl}/${getAssetID.OwnershipDocument}`} /></h5>
+                  <h5><button onClick={() => openInNewTab(`${mediaUrl}/${getAssetID.OwnershipDocument}`)}>Document View</button></h5>
+                  <h5></h5>
                 </TableCell>
               </TableCol>
               <TableCol>

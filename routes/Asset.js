@@ -1,6 +1,7 @@
 const express = require("express");
 const assetRouter = express.Router();
 const asset = require("../models/AssetSchema");
+const Project = require("../models/Project");
 
 const multer = require("multer");
 const { v4: uuidv4 } = require("uuid");
@@ -17,10 +18,7 @@ const storage = multer.diskStorage({
 });
 
 const filefilter = (req, file, cb) => {
-  const allowedFileTypes = [
-    
-    "application/pdf",
-  ];
+  const allowedFileTypes = ["application/pdf"];
   if (allowedFileTypes.includes(file.mimetype)) {
     cb(null, true);
   } else {
@@ -67,7 +65,7 @@ assetRouter
     };
 
     const newUser = new asset(newUserData);
-    console.log(newUser);
+
     newUser
       .save()
       .then(() => res.json("user added"))
@@ -78,11 +76,12 @@ assetRouter.get("/getasset", async (req, res) => {
   try {
     const assetUser = await asset.find();
     res.status(201).json(assetUser);
-    console.log(assetUser);
   } catch (error) {
     res.status(422).json(error);
   }
 });
+
+
 
 assetRouter.get("/getasset/:id", async (req, res) => {
   try {
@@ -147,4 +146,5 @@ assetRouter.get("/tableasset/:id/comment/:id", async (req, res) => {
     res.status(422).json(error);
   }
 });
+
 module.exports = assetRouter;

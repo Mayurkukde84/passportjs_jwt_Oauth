@@ -34,7 +34,7 @@ projectRouter.get("/getproject", async (req, res) => {
   try {
     const getproject = await project.find();
     res.status(201).json(getproject);
-    console.log(getproject);
+    
   } catch (error) {
     res.status(422).json(error);
   }
@@ -45,6 +45,16 @@ projectRouter.get("/getproject/:id", async (req, res) => {
     console.log(req.params);
     const { id } = req.params;
     const projectuser = await project.findById({ _id: id });
+    res.status(201).json(projectuser);
+  } catch (error) {
+    res.status(422).json(error);
+  }
+});
+projectRouter.get("/getprojectasset", async (req, res) => {
+  try {
+    console.log(req.params);
+    const { id } = req.params;
+    const projectuser = await project.findOne(id)
     res.status(201).json(projectuser);
   } catch (error) {
     res.status(422).json(error);
@@ -72,5 +82,7 @@ projectRouter.delete("/getprojectdelet/:id", async (req, res) => {
     res.status(422).json(error);
   }
 });
+
+
 
 module.exports = projectRouter;

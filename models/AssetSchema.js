@@ -39,7 +39,7 @@ const assetSchema = new mongoose.Schema({
         
     },
     Price: {
-        type: String,
+        type: Number,
         
     },
     CostCode: {

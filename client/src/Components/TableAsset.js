@@ -5,29 +5,26 @@ import { FiEdit } from "react-icons/fi";
 import { AiFillDelete } from "react-icons/ai";
 import { NavLink, useHistory } from "react-router-dom";
 import { nanoid } from "nanoid";
-import sample from "../images/2b632f3f-477e-4b43-b782-da94d8e46d4d-1657187715035.pdf"
+
 import axios from "axios";
 import { pdfjs } from "react-pdf";
-import { Document, Page } from "react-pdf";
 
 import { mediaUrl } from "../config";
-pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${
-  pdfjs.version
-}/pdf.worker.js`;
+pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
 const TableAsset = () => {
+  const openInNewTab = (url) => {
+    window.open(url, "_blank", "noopener,noreferrer");
+  };
 
-  const openInNewTab = url => {
-    window.open(url, '_blank', 'noopener,noreferrer');
-  };  
-  
   const history = useHistory("");
   const [getVendor, setVendor] = useState([]);
   const [getCostCode, setCostCode] = useState([]);
   const [getAssetData, setAssetData] = useState([]);
+  const [getProject, setProject] = useState([]);
+  const [query, setQuery] = useState([]);
 
   // model.id = nanoid()
 
-  console.log(getAssetData);
   const [inpAsset, setInpAsset] = useState({
     ItemName: " ",
     ID: nanoid(5),
@@ -57,7 +54,6 @@ const TableAsset = () => {
 
   const handlePhoto = (e) => {
     setInpAsset({ ...inpAsset, OwnershipDocument: e.target.files[0] });
-    console.log(inpAsset.OwnershipDocument);
   };
 
   const addinpasset = (e) => {
@@ -130,6 +126,23 @@ const TableAsset = () => {
       setCostCode(await getres1);
     };
     costcode();
+  }, []);
+
+  const addgetproject = async () => {
+    const res = await fetch(`http://localhost:5000/getproject`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    const data2 = await res.json();
+    setProject(data2);
+    console.log(data2);
+  };
+  console.log("data", getProject);
+
+  useEffect(() => {
+    addgetproject();
   }, []);
 
   const assetdelet = async (id) => {
@@ -289,40 +302,16 @@ const TableAsset = () => {
                   <div className="col form-inline ">
                     <label for="exampleInputEmail1">Price</label>
                     <input
-                      type="text"
+                      type="number"
                       class="form-control"
                       required="required"
                       name="Price"
-                      placeholder="Enter a phone number"
+                      placeholder="Enter price"
                       onChange={setAsset}
                       value={inpAsset.Price}
                     />
                   </div>
-                  <div className="col form-inline">
-                    <div className="col form-inline ">
-                      <label for="exampleInputEmail1">CostCode</label>
-                      <select
-                        className="form-control p-2"
-                        name="CostCode"
-                        onChange={setAsset}
-                        value={inpAsset.CostCode}
-                      >
-                        <option> ---select---</option>
 
-                        {getCostCode.map((code, index) => {
-                          return (
-                            <>
-                              <option key={index} name="CostCode">
-                                {code.CostCode}
-                              </option>
-                            </>
-                          );
-                        })}
-                      </select>
-                    </div>
-                  </div>
-                </div>
-                <div className="row">
                   <div className="col form-inline ">
                     <label for="exampleInputEmail1">ProjectName</label>
                     <select
@@ -334,15 +323,42 @@ const TableAsset = () => {
                       <option> ---select---</option>
                       {getCostCode.map((code, index) => {
                         return (
-                          <option key={index} name="CostCode">
-                            {code.ProjectName}
-                          </option>
+                          <>
+                            <option key={index}>{code.ProjectName}</option>
+                          </>
                         );
                       })}
                     </select>
                   </div>
+                </div>
+                <div className="row">
+                  {/* <div className="col form-inline">
+                    <div className="col form-inline ">
+                      <label for="exampleInputEmail1">CostCode</label>
+                      <select
+                        className="form-control p-2"
+                        name="CostCode"
+                        onChange={setAsset}
+                        value={inpAsset.CostCode}
+                      >
+                        
 
-                  <div className="col form-inline ">
+                        {getCostCode
+                          .filter((project) =>
+                            project.ProjectName.toLowerCase().includes(inpAsset.ProjectName)
+                          )
+                          .map((item) => {
+                            return (
+                              <>
+                                <option>{item.CostCode}</option>
+                              </>
+                            );
+                          })}
+                      </select>
+                    </div>
+                  </div> */}
+
+                  {/* <div className="col form-inline ">
                     <label for="exampleInputEmail1">OwnedBy</label>
                     <select
                       className="form-control p-2"
@@ -355,11 +371,12 @@ const TableAsset = () => {
                         return (
                           <option key={index} name="OwnedBy">
                             {code.Owner}
+                            
                           </option>
                         );
                       })}
                     </select>
-                  </div>
+                  </div>  */}
                 </div>
                 <div className="row">
                   <div className="col form-inline ">
@@ -391,17 +408,6 @@ const TableAsset = () => {
                       <option value="Software">Software</option>
                       <option value="Laptop">Laptop</option>
                     </select>
-                    {/* <input
-                      type="text"
-                      class="form-control"
-                      required="required"
-                      name="Type"
-                      placeholder="Enter a phone number"
-                      onChange={setAsset}
-                      value={inpAsset.Type}
-
-                    
-                    /> */}
                   </div>
                 </div>
 
@@ -428,9 +434,10 @@ const TableAsset = () => {
               <th scope="col">Vendor</th>
               <th scope="col">Receipt</th>
               <th scope="col">Price</th>
-              <th scope="col">Cost code</th>
+
               <th scope="col">Project Name</th>
-              <th scope="col">Owned by</th>
+              <th scope="col">Cost code</th>
+              {/* <th scope="col">Owned by</th> */}
               <th scope="col">Ownership Document</th>
               <th scope="col">Date Of Purhase</th>
               <th scope="col">Action</th>
@@ -452,20 +459,32 @@ const TableAsset = () => {
                     <td>{element.Vendor}</td>
                     <td>{element.Receipt}</td>
                     <td>{element.Price}</td>
-                    <td>{element.CostCode}</td>
                     <td>{element.ProjectName}</td>
-                    <td>{element.OwnedBy}</td>
-                    {/* <td><Document file={`${mediaUrl}/${element.OwnershipDocument}`}>
-                    <Page pageNumber={pageNumber} />
+                    <td> {getCostCode
+                          .filter((project) =>
+                            project.ProjectName.toLowerCase().includes(element.ProjectName)
+                          )
+                          .map((item) => {
+                            return (
+                              <>
+                                <option>{item.CostCode}</option>
+                              </>
+                            );
+                          })}</td>
+                   
+                    {/* <td>{element.OwnedBy}</td> */}
 
-                    </Document></td>  */}
-                    <td><button onClick={() => openInNewTab(`${mediaUrl}/${element.OwnershipDocument}`)}>OwnershipDocument View</button></td>
-                    {/* <td><Document file={sample}>
-                    <Page pageNumber={pageNumber} />
-
-                    </Document>
-
-                    </td> */}
+                    <td>
+                      <button
+                        onClick={() =>
+                          openInNewTab(
+                            `${mediaUrl}/${element.OwnershipDocument}`
+                          )
+                        }
+                      >
+                        Document View
+                      </button>
+                    </td>
 
                     <td>{element.DateOfPurchase}</td>
 
