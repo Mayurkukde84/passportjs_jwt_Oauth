@@ -21,7 +21,7 @@ const VendorSchema = new mongoose.Schema({
         required: true
     },
     GSTNumber:{
-        type: "String",
+        type: "Number",
         required: true
     },
     VendorType:{

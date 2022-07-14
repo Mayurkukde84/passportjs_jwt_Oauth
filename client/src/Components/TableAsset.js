@@ -21,7 +21,7 @@ const TableAsset = () => {
   const [getCostCode, setCostCode] = useState([]);
   const [getAssetData, setAssetData] = useState([]);
   const [getProject, setProject] = useState([]);
-  const [query, setQuery] = useState([]);
+  
 
   // model.id = nanoid()
 

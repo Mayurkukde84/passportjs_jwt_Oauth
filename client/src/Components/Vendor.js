@@ -162,7 +162,7 @@ const Vendor = () => {
                   <div className="col form-inline m-3">
                     <label for="exampleInputEmail1">Phone Number</label>
                     <input
-                      type="text"
+                      type="number"
                       value={addFormData.PhoneNumber}
                       class="form-control"
                       required="required"
@@ -174,7 +174,7 @@ const Vendor = () => {
                   <div className="col form-inline m-3">
                     <label for="exampleInputEmail1">GST Number</label>
                     <input
-                      type="text"
+                      type="number"
                       value={addFormData.GSTNumber}
                       class="form-control"
                       required="required"

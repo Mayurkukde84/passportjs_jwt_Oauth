@@ -24,7 +24,7 @@ const TableAssetDetails = () => {
   };  
   const history = useHistory("");
   const [getAssetID, setAssetID] = useState([]);
- 
+  const [getCostCode, setCostCode] = useState([]);
   const { id } = useParams(" ");
   const { user } = useContext(AuthContext);
   
@@ -85,6 +85,16 @@ const TableAssetDetails = () => {
       history.push("/tableasset");
     }
   };
+
+  useEffect(() => {
+    const costcode = async () => {
+      const res = await fetch(`http://localhost:5000/getproject`);
+      const getres1 = await res.json();
+
+      setCostCode(await getres1);
+    };
+    costcode();
+  }, []);
 
   return (
     <>
@@ -167,14 +177,7 @@ const TableAssetDetails = () => {
                   <h5> {getAssetID.Price}</h5>
                 </TableCell>
               </TableCol>
-              <TableCol>
-                <TableCell>
-                  <h5>CostCode:</h5>
-                </TableCell>
-                <TableCell align="right">
-                  <h5> {getAssetID.CostCode}</h5>
-                </TableCell>
-              </TableCol>
+              
               <TableCol>
                 <TableCell>
                   <h5>Project Name:</h5>
@@ -185,12 +188,30 @@ const TableAssetDetails = () => {
               </TableCol>
               <TableCol>
                 <TableCell>
+                  <h5>CostCode:</h5>
+                </TableCell>
+                <TableCell align="right">
+                  <h5>  {getCostCode
+                          .filter((project) =>
+                            project.ProjectName.toLowerCase().includes(getAssetID.ProjectName)
+                          )
+                          .map((item) => {
+                            return (
+                              <>
+                                <option>{item.CostCode}</option>
+                              </>
+                            );
+                          })}</h5>
+                </TableCell>
+              </TableCol>
+              {/* <TableCol>
+                <TableCell>
                   <h5>Owned By:</h5>
                 </TableCell>
                 <TableCell align="right">
                   <h5> {getAssetID.OwnedBy}</h5>
                 </TableCell>
-              </TableCol>
+              </TableCol> */}
               <TableCol>
                 <TableCell>
                   <h5>Owner Ship Document:</h5>

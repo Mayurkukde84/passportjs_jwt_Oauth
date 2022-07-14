@@ -7,7 +7,7 @@ const EmployeeSchema = new mongoose.Schema({
     unique:true
   },
   EmployeeID: {
-    type: String,
+    type: Number,
     required: true,
   },
   Department: {
@@ -15,7 +15,7 @@ const EmployeeSchema = new mongoose.Schema({
     required: true,
   },
   PhoneNumber: {
-    type: String,
+    type: Number,
     required: true,
   },
   Address: {

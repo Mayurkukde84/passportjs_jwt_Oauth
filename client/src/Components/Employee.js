@@ -123,7 +123,7 @@ const Employee = () => {
                   <div className="col form-inline p-2">
                     <label for="exampleInputEmail1">ID</label>
                     <input
-                      type="text"
+                      type="number"
                       class="form-control"
                       required="required"
                       name="EmployeeID"
@@ -149,7 +149,7 @@ const Employee = () => {
                   <div className="col form-inline">
                     <label for="exampleInputEmail1">Phone Number</label>
                     <input
-                      type="text"
+                      type="number"
                       class="form-control"
                       required="required"
                       name="PhoneNumber"
